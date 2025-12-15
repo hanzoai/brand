@@ -8,6 +8,7 @@ export * from './logos'
 export * from './tokens'
 export * from './themes'
 export * from './utils'
+export * from './docs'
 
 // Main brand configuration
 export { brandConfig } from './config'
