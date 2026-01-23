@@ -3,6 +3,7 @@
  */
 
 export * from './colors'
+export { hanzoRed, hanzoRedRGB } from './colors'
 export * from './typography'
 export * from './logos'
 export * from './tokens'
