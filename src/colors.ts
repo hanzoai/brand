@@ -1,8 +1,38 @@
 /**
  * Hanzo brand colors
+ *
+ * Official Hanzo Red: rgb(216, 28, 54) = #d81c36
  */
 
+// Official brand color - Hanzo Red
+export const hanzoRed = {
+  DEFAULT: '#d81c36',    // rgb(216, 28, 54) - Primary brand red
+  50: '#fdf2f3',         // Lightest tint
+  100: '#fce4e6',
+  200: '#fbcdd2',
+  300: '#f7a8b1',
+  400: '#f17485',
+  500: '#e6475c',
+  600: '#d81c36',        // Base color
+  700: '#b5152b',
+  800: '#961528',
+  900: '#7d1626',
+  950: '#450710',        // Darkest shade
+} as const
+
+// RGB values for programmatic use
+export const hanzoRedRGB = {
+  r: 216,
+  g: 28,
+  b: 54,
+  css: 'rgb(216, 28, 54)',
+  cssA: (alpha: number) => `rgba(216, 28, 54, ${alpha})`,
+} as const
+
 export const colors = {
+  // Hanzo brand red
+  hanzo: hanzoRed,
+
   // Primary colors
   primary: {
     DEFAULT: '#0A0A0B',
@@ -26,11 +56,12 @@ export const colors = {
     darker: '#C4C4C4',
   },
 
-  // Accent colors
+  // Accent colors (Hanzo Red)
   accent: {
-    DEFAULT: '#3B82F6',
-    light: '#60A5FA',
-    dark: '#2563EB',
+    DEFAULT: '#d81c36',  // Hanzo Red
+    light: '#e6475c',    // hanzoRed.500
+    dark: '#b5152b',     // hanzoRed.700
+    hover: '#c01830',    // Darker for hover states
   },
 
   // Semantic colors
@@ -100,8 +131,8 @@ export const colors = {
     tertiary: '#737373',
     disabled: '#A3A3A3',
     inverse: '#FFFFFF',
-    link: '#3B82F6',
-    linkHover: '#2563EB',
+    link: '#d81c36',
+    linkHover: '#b5152b',
   },
 
   // Border colors
@@ -109,7 +140,7 @@ export const colors = {
     DEFAULT: '#E5E5E5',
     light: '#F5F5F5',
     dark: '#D4D4D4',
-    focus: '#3B82F6',
+    focus: '#d81c36',
   },
 
   // Special colors
@@ -125,8 +156,9 @@ export const colors = {
   // Gradients
   gradients: {
     primary: 'linear-gradient(135deg, #0A0A0B 0%, #262626 100%)',
-    accent: 'linear-gradient(135deg, #3B82F6 0%, #2563EB 100%)',
-    sunset: 'linear-gradient(135deg, #F59E0B 0%, #EF4444 100%)',
+    accent: 'linear-gradient(135deg, #d81c36 0%, #b5152b 100%)',
+    hanzo: 'linear-gradient(135deg, #e6475c 0%, #d81c36 100%)',
+    sunset: 'linear-gradient(135deg, #F59E0B 0%, #d81c36 100%)',
     ocean: 'linear-gradient(135deg, #3B82F6 0%, #10B981 100%)',
   },
 } as const
