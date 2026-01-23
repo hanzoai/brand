@@ -1,7 +1,7 @@
 /**
  * @hanzo/brand CSS Variables
  *
- * Official Hanzo Red: rgb(216, 28, 54) = #d81c36
+ * Official Hanzo Red: rgb(216, 28, 54) = #d81c33
  *
  * Usage:
  *   @import '@hanzo/brand/styles/variables.css';
@@ -10,7 +10,7 @@
 
 :root {
   /* ===== Hanzo Brand Red ===== */
-  --hanzo-red: #d81c36;
+  --hanzo-red: #d81c33;
   --hanzo-red-rgb: 216, 28, 54;
   --hanzo-red-50: #fdf2f3;
   --hanzo-red-100: #fce4e6;
@@ -18,7 +18,7 @@
   --hanzo-red-300: #f7a8b1;
   --hanzo-red-400: #f17485;
   --hanzo-red-500: #e6475c;
-  --hanzo-red-600: #d81c36;
+  --hanzo-red-600: #d81c33;
   --hanzo-red-700: #b5152b;
   --hanzo-red-800: #961528;
   --hanzo-red-900: #7d1626;
