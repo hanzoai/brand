@@ -1,0 +1,47 @@
+{
+  "name": "@hanzo/brand",
+  "version": "1.0.0",
+  "description": "Official brand assets and design system for Hanzo AI",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "assets",
+    "fonts",
+    "styles"
+  ],
+  "scripts": {
+    "build": "tsup src/index.ts --format cjs,esm --dts --clean",
+    "dev": "tsup src/index.ts --format cjs,esm --dts --watch",
+    "lint": "eslint src",
+    "type-check": "tsc --noEmit"
+  },
+  "keywords": [
+    "hanzo",
+    "brand",
+    "design-system",
+    "ui",
+    "assets",
+    "logo",
+    "colors",
+    "typography"
+  ],
+  "author": "Hanzo AI",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hanzoai/brand"
+  },
+  "homepage": "https://github.com/hanzoai/brand",
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "eslint": "^8.0.0",
+    "tsup": "^8.0.0",
+    "typescript": "^5.0.0"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  }
+}
