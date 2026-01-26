@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hanzo AI Brand</title>
+  <meta name="description" content="Hanzo AI brand guidelines and assets">
+  <style>
+    :root {
+      --bg: #0a0a0a;
+      --fg: #fafafa;
+      --muted: #71717a;
+      --accent: #6366f1;
+      --border: #27272a;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+      min-height: 100vh;
+      padding: 4rem 2rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.02em;
+      text-align: center;
+    }
+    .tagline {
+      font-size: 1.25rem;
+      color: var(--muted);
+      margin-bottom: 4rem;
+      text-align: center;
+    }
+    section { margin-bottom: 4rem; }
+    h2 {
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .color-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 1rem;
+    }
+    .color-card {
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .color-swatch {
+      height: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+    }
+    .color-info {
+      background: var(--border);
+      padding: 1rem;
+      font-size: 0.875rem;
+    }
+    .color-info span { display: block; color: var(--muted); }
+    .type-sample {
+      background: var(--border);
+      padding: 2rem;
+      border-radius: 12px;
+      margin-bottom: 1rem;
+    }
+    .type-sample h3 { font-size: 2rem; margin-bottom: 0.5rem; }
+    .type-sample p { color: var(--muted); }
+    .links {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      margin-top: 3rem;
+    }
+    a {
+      color: var(--accent);
+      text-decoration: none;
+      padding: 0.75rem 1.5rem;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      transition: all 0.2s;
+    }
+    a:hover {
+      background: var(--accent);
+      color: var(--bg);
+      border-color: var(--accent);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Hanzo AI Brand</h1>
+    <p class="tagline">Guidelines and assets</p>
+
+    <section>
+      <h2>Colors</h2>
+      <div class="color-grid">
+        <div class="color-card">
+          <div class="color-swatch" style="background: #0a0a0a; color: #fff;">Primary</div>
+          <div class="color-info">
+            <strong>#0A0A0A</strong>
+            <span>rgb(10, 10, 10)</span>
+          </div>
+        </div>
+        <div class="color-card">
+          <div class="color-swatch" style="background: #fafafa; color: #000;">Light</div>
+          <div class="color-info">
+            <strong>#FAFAFA</strong>
+            <span>rgb(250, 250, 250)</span>
+          </div>
+        </div>
+        <div class="color-card">
+          <div class="color-swatch" style="background: #6366f1; color: #fff;">Accent</div>
+          <div class="color-info">
+            <strong>#6366F1</strong>
+            <span>rgb(99, 102, 241)</span>
+          </div>
+        </div>
+        <div class="color-card">
+          <div class="color-swatch" style="background: #71717a; color: #fff;">Muted</div>
+          <div class="color-info">
+            <strong>#71717A</strong>
+            <span>rgb(113, 113, 122)</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Typography</h2>
+      <div class="type-sample">
+        <h3 style="font-weight: 700;">Inter Bold</h3>
+        <p>Used for headings and emphasis</p>
+      </div>
+      <div class="type-sample">
+        <h3 style="font-weight: 400;">Inter Regular</h3>
+        <p>Used for body text and general content</p>
+      </div>
+      <div class="type-sample" style="font-family: 'JetBrains Mono', monospace;">
+        <h3>JetBrains Mono</h3>
+        <p>Used for code and technical content</p>
+      </div>
+    </section>
+
+    <div class="links">
+      <a href="https://github.com/hanzoai/brand">Download Assets</a>
+      <a href="https://github.com/hanzoai/logo">Logo Files</a>
+      <a href="https://github.com/hanzoai/identity">Identity</a>
+    </div>
+  </div>
+</body>
+</html>
