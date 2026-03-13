@@ -5,10 +5,10 @@
 export const typography = {
   // Font families
   fontFamily: {
-    sans: ['Inter', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+    sans: ['Geist Sans', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
     serif: ['Georgia', 'Cambria', 'Times New Roman', 'Times', 'serif'],
-    mono: ['JetBrains Mono', 'Fira Code', 'SF Mono', 'Monaco', 'Consolas', 'monospace'],
-    display: ['Inter Display', 'Inter', 'system-ui', 'sans-serif'],
+    mono: ['Geist Mono', 'Monaco', 'Consolas', 'monospace'],
+    display: ['Geist Sans', 'system-ui', 'sans-serif'],
   },
 
   // Font sizes
@@ -127,7 +127,7 @@ export const typography = {
   // Code styles
   code: {
     inline: {
-      fontFamily: 'JetBrains Mono, monospace',
+      fontFamily: 'Geist Mono, monospace',
       fontSize: '0.875em',
       fontWeight: '500',
       backgroundColor: '#F5F5F5',
@@ -135,7 +135,7 @@ export const typography = {
       borderRadius: '0.25rem',
     },
     block: {
-      fontFamily: 'JetBrains Mono, monospace',
+      fontFamily: 'Geist Mono, monospace',
       fontSize: '0.875rem',
       fontWeight: '400',
       lineHeight: '1.5',
@@ -149,27 +149,19 @@ export const typography = {
 // Font face declarations for custom fonts
 export const fontFaces = `
 @font-face {
-  font-family: 'Inter';
+  font-family: 'Geist Sans';
   font-style: normal;
   font-weight: 100 900;
   font-display: swap;
-  src: url('/fonts/inter-var.woff2') format('woff2-variations');
+  src: url('/fonts/geist-sans-var.woff2') format('woff2-variations');
 }
 
 @font-face {
-  font-family: 'Inter Display';
-  font-style: normal;
-  font-weight: 100 900;
-  font-display: swap;
-  src: url('/fonts/inter-display-var.woff2') format('woff2-variations');
-}
-
-@font-face {
-  font-family: 'JetBrains Mono';
+  font-family: 'Geist Mono';
   font-style: normal;
   font-weight: 100 800;
   font-display: swap;
-  src: url('/fonts/jetbrains-mono-var.woff2') format('woff2-variations');
+  src: url('/fonts/geist-mono-var.woff2') format('woff2-variations');
 }
 `
 
