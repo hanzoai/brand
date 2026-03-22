@@ -12,7 +12,7 @@ Official brand assets and design system for Hanzo AI. Published as `@hanzo/brand
 src/
   index.ts       # Main entry - re-exports all modules, auto-applies theme in browser
   colors.ts      # Color palette: Hanzo Red (#d81c33), primary, semantic, neutral, gradients
-  typography.ts  # Font families (Inter, JetBrains Mono), sizes, weights, line heights
+  typography.ts  # Font families (Geist Sans, Geist Mono), sizes, weights, line heights
   themes.ts      # Light/dark theme definitions, applyTheme() helper
   tokens.ts      # Design tokens (spacing, radius, shadows, transitions)
   logos.tsx       # Logo component references
@@ -36,8 +36,8 @@ npm run type-check           # tsc --noEmit
 - Hanzo Red: `#d81c33` / `rgb(216, 28, 54)` -- the primary brand color
 - Accent hover: `#c01830`
 - Dark background: `#0A0A0B`
-- Sans font: Inter
-- Mono font: JetBrains Mono
+- Sans font: Geist Sans
+- Mono font: Geist Mono
 - CSS variables are prefixed with `--hanzo-`
 
 ## Notes
