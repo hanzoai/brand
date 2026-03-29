@@ -11,7 +11,12 @@ export * from './themes'
 export * from './utils'
 export * from './docs'
 
-// Main brand configuration
+// Brand runtime config (brand.json) — single source of truth
+export { brand } from './brand'
+export type { BrandConfig, BrandTheme, RuntimeConfig } from './brand-types'
+export { loadBrand, getBrandUrl, getDocsUrl, getGatewayUrl, getWsUrl, getRpcUrl } from './loader'
+
+// Legacy brand config (company info, SEO, social)
 export { brandConfig } from './config'
 
 // Quick access exports

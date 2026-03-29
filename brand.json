@@ -1,0 +1,74 @@
+{
+  "brand": {
+    "name": "Hanzo",
+    "title": "Hanzo AI",
+    "description": "Enterprise AI infrastructure and frontier models",
+    "shortName": "Hanzo",
+    "labsName": "Hanzo AI",
+    "legalEntity": "Hanzo AI Inc.",
+    "walletName": "Hanzo Wallet",
+    "protocolName": "Hanzo Protocol",
+    "copyrightHolder": "Hanzo AI Inc.",
+    "appDomain": "hanzo.ai",
+    "docsDomain": "docs.hanzo.ai",
+    "infoDomain": "info.hanzo.ai",
+    "gatewayDomain": "api.hanzo.ai",
+    "wsDomain": "ws.hanzo.ai",
+    "helpUrl": "https://docs.hanzo.ai",
+    "termsUrl": "https://hanzo.ai/terms",
+    "privacyUrl": "https://hanzo.ai/privacy",
+    "downloadUrl": "https://hanzo.ai",
+    "complianceEmail": "compliance@hanzo.ai",
+    "supportEmail": "hi@hanzo.ai",
+    "twitter": "https://x.com/hanaboroshi",
+    "farcaster": "",
+    "linkedin": "https://linkedin.com/company/hanzoai",
+    "tiktok": "",
+    "github": "https://github.com/hanzoai",
+    "discord": "https://discord.gg/hanzo",
+    "logoUrl": "https://cdn.jsdelivr.net/npm/@hanzo/brand@latest/assets/logo/logo.svg",
+    "faviconUrl": "https://cdn.jsdelivr.net/npm/@hanzo/brand@latest/assets/logo/favicon.png",
+    "primaryColor": "#FFFFFF",
+    "theme": {
+      "light": {
+        "accent1": "#000000",
+        "surface1": "#FFFFFF",
+        "surface2": "#FAFAFA",
+        "neutral1": "#0A0A0A",
+        "neutral2": "rgba(10, 10, 10, 0.6)"
+      },
+      "dark": {
+        "accent1": "#FFFFFF",
+        "surface1": "#000000",
+        "surface2": "#111111",
+        "neutral1": "#FAFAFA",
+        "neutral2": "rgba(250, 250, 250, 0.6)"
+      }
+    }
+  },
+  "chains": {
+    "defaultChainId": 1,
+    "supported": [1, 96369, 200200, 42161, 8453, 137, 43114]
+  },
+  "rpc": {
+    "1": "https://eth.llamarpc.com",
+    "96369": "https://api.lux.network/ext/bc/C/rpc",
+    "200200": "https://api.zoo.network/ext/bc/C/rpc",
+    "42161": "https://arb1.arbitrum.io/rpc",
+    "8453": "https://mainnet.base.org",
+    "137": "https://polygon-rpc.com",
+    "43114": "https://api.avax.network/ext/bc/C/rpc"
+  },
+  "api": {
+    "graphql": "https://api.hanzo.ai/v1/graphql",
+    "gateway": "https://api.hanzo.ai",
+    "insights": "https://insights.hanzo.ai"
+  },
+  "iam": {
+    "provider": "https://hanzo.id",
+    "clientId": "hanzo-app"
+  },
+  "walletConnect": {
+    "projectId": ""
+  }
+}
