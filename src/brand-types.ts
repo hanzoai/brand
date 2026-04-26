@@ -77,6 +77,13 @@ export interface BrandConfig {
   complianceEmail: string
   supportEmail: string
 
+  // Legal / corporate (optional — used by white-label deployments such as Liquidity)
+  phone?: string
+  ceo?: string
+  physicalAddress?: string
+  mailingAddress?: string
+  corpNumber?: string
+
   // Social
   twitter: string
   farcaster: string
