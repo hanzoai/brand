@@ -90,7 +90,7 @@ export async function loadBrand(): Promise<RuntimeConfig> {
     }
   }
 
-  // Inject theme CSS variables (works for any Tamagui/Spore-based UI)
+  // Inject theme CSS variables (works for any @hanzo/gui or Spore-based UI)
   if (typeof document !== 'undefined' && brand.theme) {
     const prefersDark = window.matchMedia?.('(prefers-color-scheme: dark)').matches
     const bt = prefersDark ? brand.theme.dark : brand.theme.light
