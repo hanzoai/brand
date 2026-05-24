@@ -1,0 +1,41 @@
+name: npm publish
+
+# Publishes @hanzo/brand to npmjs.com whenever the package.json version
+# field changes on main. Run-once-per-version: the workflow no-ops if
+# the same version is already on the registry.
+
+on:
+  push:
+    branches: [main]
+    paths: ['package.json']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write   # for npm provenance
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          registry-url: https://registry.npmjs.org/
+      - name: Skip if already published
+        id: check
+        run: |
+          NAME=$(jq -r .name package.json)
+          VER=$(jq -r .version package.json)
+          if curl -fsSL "https://registry.npmjs.org/$NAME/$VER" > /dev/null 2>&1; then
+            echo "$NAME@$VER already on registry; skipping"
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "skip=false" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Publish
+        if: steps.check.outputs.skip != 'true'
+        run: npm publish --access public --provenance
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
