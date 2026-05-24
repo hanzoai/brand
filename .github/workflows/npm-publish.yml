@@ -36,6 +36,9 @@ jobs:
           fi
       - name: Publish
         if: steps.check.outputs.skip != 'true'
-        run: npm publish --access public --provenance
+        # --provenance requires the package to already exist on the registry
+        # with provenance enabled. Pass --no-provenance until first manual
+        # publish lands; flip back to --provenance after.
+        run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
