@@ -62,10 +62,10 @@ values like `/12` or `/37`.
 | macOS window-chrome dot trio | red/yellow/green @ 60% | OS affordance reproduction |
 | External brand logos | brand's official hex | Recognizing third-party identity |
 
-For brands with a saturated primary (Zoo, Pars, Liquidity, Osage, Zen, MIGA,
-Cyrus), prefer the brand's own palette over the generic Tailwind red/green
-above where the brand maps cleanly (e.g. Osage red `#b8312f` for errors,
-Zoo green `#00A652` for success).
+For brands with a saturated primary (Zoo, Pars, Osage, Zen, MIGA, Cyrus),
+prefer the brand's own palette over the generic Tailwind red/green above
+where the brand maps cleanly (e.g. Osage red `#b8312f` for errors, Zoo
+green `#00A652` for success).
 
 ---
 
