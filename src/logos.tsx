@@ -1,58 +1,34 @@
 /**
- * Hanzo brand logos and logo components
+ * Hanzo brand logos and logo components.
+ *
+ * The one true mark is the monochrome "blocky-H" (67x67, 7 paths). Do NOT
+ * reintroduce the made-up square-in-square H or any hand-drawn H. The favicon
+ * is the blocky-H on a black rounded square.
  */
 
 import React from 'react'
 
-// Logo URLs
+// Real brand assets shipped in this package (assets/logo/*).
 export const logos = {
-  full: {
-    dark: {
-      svg: '/assets/logo/hanzo-full-dark.svg',
-      png: '/assets/logo/hanzo-full-dark.png',
-    },
-    light: {
-      svg: '/assets/logo/hanzo-full-light.svg',
-      png: '/assets/logo/hanzo-full-light.png',
-    },
-  },
+  // The blocky-H mark (transparent background, monochrome).
   mark: {
-    dark: {
-      svg: '/assets/logo/hanzo-mark-dark.svg',
-      png: '/assets/logo/hanzo-mark-dark.png',
-    },
-    light: {
-      svg: '/assets/logo/hanzo-mark-light.svg',
-      png: '/assets/logo/hanzo-mark-light.png',
-    },
+    svg: '/assets/logo/logo.svg',
   },
-  horizontal: {
-    dark: {
-      svg: '/assets/logo/hanzo-horizontal-dark.svg',
-      png: '/assets/logo/hanzo-horizontal-dark.png',
-    },
-    light: {
-      svg: '/assets/logo/hanzo-horizontal-light.svg',
-      png: '/assets/logo/hanzo-horizontal-light.png',
-    },
+  // Mark + "Hanzo" wordmark.
+  wordmark: {
+    svg: '/assets/logo/wordmark.svg',
   },
-  stacked: {
-    dark: {
-      svg: '/assets/logo/hanzo-stacked-dark.svg',
-      png: '/assets/logo/hanzo-stacked-dark.png',
-    },
-    light: {
-      svg: '/assets/logo/hanzo-stacked-light.svg',
-      png: '/assets/logo/hanzo-stacked-light.png',
-    },
+  // Favicon: blocky-H on a black rounded square.
+  favicon: {
+    svg: '/assets/logo/favicon.svg',
+    png: '/assets/logo/favicon.png',
   },
 } as const
 
 // Logo component props
 export interface HanzoLogoProps {
-  variant?: 'full' | 'mark' | 'horizontal' | 'stacked'
+  variant?: 'mark' | 'wordmark'
   size?: 'small' | 'medium' | 'large' | 'xl' | number
-  theme?: 'light' | 'dark' | 'auto'
   className?: string
   style?: React.CSSProperties
 }
@@ -65,31 +41,22 @@ const sizeMap = {
   xl: 64,
 }
 
-// Logo React component
+// Logo React component (renders a shipped asset by <img>).
 export function HanzoLogo({
-  variant = 'full',
+  variant = 'mark',
   size = 'medium',
-  theme = 'auto',
   className = '',
   style = {},
 }: HanzoLogoProps) {
   const height = typeof size === 'number' ? size : sizeMap[size]
-  
-  // Auto theme detection
-  const actualTheme = theme === 'auto' 
-    ? (typeof window !== 'undefined' && window.matchMedia('(prefers-color-scheme: dark)').matches) 
-      ? 'dark' 
-      : 'light'
-    : theme
-
-  const logoSrc = logos[variant][actualTheme].svg
+  const logoSrc = logos[variant].svg
 
   return (
     <img
       src={logoSrc}
       alt="Hanzo Logo"
       height={height}
-      className={`hanzo-logo hanzo-logo--${variant} hanzo-logo--${actualTheme} ${className}`}
+      className={`hanzo-logo hanzo-logo--${variant} ${className}`}
       style={{
         height: `${height}px`,
         width: 'auto',
@@ -99,7 +66,11 @@ export function HanzoLogo({
   )
 }
 
-// SVG Logo component (inline)
+/**
+ * Inline SVG of the real blocky-H mark. `fill="currentColor"` (default) so it
+ * adapts to the surrounding theme. The two opacity-0.8 paths are the canonical
+ * accents.
+ */
 export function HanzoLogoSVG({
   size = 32,
   color = 'currentColor',
@@ -113,48 +84,42 @@ export function HanzoLogoSVG({
     <svg
       width={size}
       height={size}
-      viewBox="0 0 32 32"
-      fill="none"
+      viewBox="0 0 67 67"
+      fill={color}
       xmlns="http://www.w3.org/2000/svg"
       className={className}
+      aria-label="Hanzo"
+      role="img"
     >
-      <path
-        d="M8 8H24V24H8V8Z"
-        fill={color}
-      />
-      <path
-        d="M12 12H20V20H12V12Z"
-        fill="white"
-        fillOpacity="0.2"
-      />
-      <path
-        d="M14 4L18 8H14V4Z"
-        fill={color}
-      />
-      <path
-        d="M18 28L14 24H18V28Z"
-        fill={color}
-      />
-      <path
-        d="M4 14L8 18V14H4Z"
-        fill={color}
-      />
-      <path
-        d="M28 18L24 14V18H28Z"
-        fill={color}
-      />
+      <path d="M22.21 67V44.6369H0V67H22.21Z" />
+      <path d="M0 44.6369L22.21 46.8285V44.6369H0Z" opacity="0.8" />
+      <path d="M66.7038 22.3184H22.2534L0.0878906 44.6367H44.4634L66.7038 22.3184Z" />
+      <path d="M22.21 0H0V22.3184H22.21V0Z" />
+      <path d="M66.7198 0H44.5098V22.3184H66.7198V0Z" />
+      <path d="M66.6753 22.3185L44.5098 20.0822V22.3185H66.6753Z" opacity="0.8" />
+      <path d="M66.7198 67V44.6369H44.5098V67H66.7198Z" />
     </svg>
   )
 }
 
-// Logo favicon component
-export function HanzoFavicon({ size = 16 }: { size?: number }) {
+/**
+ * Favicon component: the real blocky-H on a black rounded square (visible on
+ * any browser tab background).
+ */
+export function HanzoFavicon() {
+  const svg = encodeURIComponent(
+    `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'>` +
+      `<rect width='64' height='64' rx='8' fill='#000000'/>` +
+      `<g transform='translate(8,8) scale(0.716)' fill='#ffffff'>` +
+      `<path d='M22.21 67V44.6369H0V67H22.21Z'/>` +
+      `<path d='M66.7038 22.3184H22.2534L0.0878906 44.6367H44.4634L66.7038 22.3184Z'/>` +
+      `<path d='M22.21 0H0V22.3184H22.21V0Z'/>` +
+      `<path d='M66.7198 0H44.5098V22.3184H66.7198V0Z'/>` +
+      `<path d='M66.7198 67V44.6369H44.5098V67H66.7198Z'/>` +
+      `</g></svg>`,
+  )
   return (
-    <link
-      rel="icon"
-      type="image/svg+xml"
-      href={`data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 ${size} ${size}'><rect width='${size}' height='${size}' fill='%230A0A0B'/><rect x='${size * 0.25}' y='${size * 0.25}' width='${size * 0.5}' height='${size * 0.5}' fill='white' opacity='0.2'/></svg>`}
-    />
+    <link rel="icon" type="image/svg+xml" href={`data:image/svg+xml,${svg}`} />
   )
 }
 
