@@ -1,3 +1,5 @@
+<p align="center"><img src=".github/hero.svg" alt="brand" width="880"></p>
+
 # Brand Guidelines
 
 Official brand guidelines and assets.
