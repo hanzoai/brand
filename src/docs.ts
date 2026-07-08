@@ -3,12 +3,11 @@
  * Hanzo brand - Pure monochrome, Vercel/Linear style
  */
 
-import { colors } from './colors'
-
 /**
  * Fumadocs-compatible CSS variables
  */
 export interface DocsThemeVariables {
+  [key: string]: string
   '--color-fd-background': string
   '--color-fd-foreground': string
   '--color-fd-muted': string

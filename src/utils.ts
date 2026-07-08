@@ -2,7 +2,6 @@
  * Utility functions for brand usage
  */
 
-import { colors } from './colors'
 import { tokens } from './tokens'
 
 /**
@@ -76,7 +75,7 @@ export function meetsContrastAAA(foreground: string, background: string): boolea
 /**
  * Generate color palette from base color
  */
-export function generatePalette(baseColor: string, name = 'custom') {
+export function generatePalette(baseColor: string, _name = 'custom') {
   const rgb = hexToRgb(baseColor)
   if (!rgb) return null
 
