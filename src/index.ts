@@ -11,6 +11,14 @@ export * from './themes'
 export * from './utils'
 export * from './docs'
 
+// README hero + social (og:image) card generator
+export { renderHero } from './hero'
+export type { HeroOptions } from './hero'
+
+// Social-card toolkit — post / announcement / quote / showcase cards
+export { renderPost, renderAnnouncement, renderQuote, renderShowcase, mark } from './cards'
+export type { Palette, PostCard, AnnouncementCard, QuoteCard, ShowcaseCard } from './cards'
+
 // Brand runtime config (brand.json) — single source of truth
 export { brand } from './brand'
 export type { BrandConfig, BrandTheme, RuntimeConfig } from './brand-types'
