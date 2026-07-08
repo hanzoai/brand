@@ -1,4 +1,4 @@
-import type { BrandConfig, BrandTheme, RuntimeConfig } from './brand-types'
+import type { BrandConfig, RuntimeConfig } from './brand-types'
 
 /**
  * Mutable brand singleton — populated by loadBrand() from /brand.json.
