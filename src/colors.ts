@@ -171,7 +171,7 @@ export function getCSSVariables(prefix = 'hanzo') {
   function flatten(obj: any, parentKey = '') {
     Object.entries(obj).forEach(([key, value]) => {
       const newKey = parentKey ? `${parentKey}-${key}` : key
-      if (typeof value === 'object' && !value.includes?.('gradient')) {
+      if (value !== null && typeof value === 'object') {
         flatten(value, newKey)
       } else {
         const varName = `--${prefix}-${newKey.toLowerCase().replace(/_/g, '-')}`

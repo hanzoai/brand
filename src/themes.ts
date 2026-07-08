@@ -2,12 +2,16 @@
  * Theme management for Hanzo brand
  */
 
+import React from 'react'
 import { colors } from './colors'
 import { getCSSVariables } from './colors'
 
+/** Recursive brand color map — light and dark palettes both satisfy this. */
+export type ColorTokens = { [key: string]: string | ColorTokens }
+
 export interface Theme {
   name: string
-  colors: typeof colors
+  colors: ColorTokens
   cssVariables: Record<string, string>
 }
 
