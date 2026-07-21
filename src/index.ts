@@ -24,6 +24,11 @@ export { brand } from './brand'
 export type { BrandConfig, BrandTheme, RuntimeConfig } from './brand-types'
 export { loadBrand, getBrandUrl, getDocsUrl, getGatewayUrl, getWsUrl, getRpcUrl } from './loader'
 
+// White-label brand registry + host resolver — the multi-brand layer
+// (hanzo / lux / zoo / pars + white-label tenants). `getBrand(host)` resolves
+// the active brand by hostname; a lux/zoo/pars host never resolves to Hanzo.
+export * from './registry'
+
 // Legacy brand config (company info, SEO, social)
 export { brandConfig } from './config'
 
