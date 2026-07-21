@@ -1,39 +1,38 @@
 /**
- * Hanzo brand colors
+ * Hanzo brand colors.
  *
- * Official Hanzo Red: rgb(216, 28, 54) = #d81c33
+ * Hanzo is MONOCHROME — the identity is black, white, and a neutral grayscale.
+ * There is no brand hue. The accent flips black↔white with the color scheme
+ * (see brand.json theme). Status semantics (success/warning/error/info) are
+ * standard functional indicators, not brand colors.
  */
 
-// Official brand color - Hanzo Red
-export const hanzoRed = {
-  DEFAULT: '#d81c33',    // rgb(216, 28, 54) - Primary brand red
-  50: '#fdf2f3',         // Lightest tint
-  100: '#fce4e6',
-  200: '#fbcdd2',
-  300: '#f7a8b1',
-  400: '#f17485',
-  500: '#e6475c',
-  600: '#d81c33',        // Base color
-  700: '#b5152b',
-  800: '#961528',
-  900: '#7d1626',
-  950: '#450710',        // Darkest shade
-} as const
+// The two named brand poles.
+export const hanzoBlack = '#0A0A0B' as const
+export const hanzoWhite = '#FFFFFF' as const
 
-// RGB values for programmatic use
-export const hanzoRedRGB = {
-  r: 216,
-  g: 28,
-  b: 54,
-  css: 'rgb(216, 28, 54)',
-  cssA: (alpha: number) => `rgba(216, 28, 54, ${alpha})`,
+// The monochrome brand scale (Hanzo Black → Hanzo White).
+export const hanzoMono = {
+  DEFAULT: hanzoBlack,
+  50: '#FAFAFA',
+  100: '#F5F5F5',
+  200: '#E5E5E5',
+  300: '#D4D4D4',
+  400: '#A3A3A3',
+  500: '#737373',
+  600: '#525252',
+  700: '#404040',
+  800: '#262626',
+  900: '#171717',
+  950: '#0A0A0A',
+  1000: '#000000',
 } as const
 
 export const colors = {
-  // Hanzo brand red
-  hanzo: hanzoRed,
+  // Monochrome brand scale.
+  hanzo: hanzoMono,
 
-  // Primary colors
+  // Primary colors (ink)
   primary: {
     DEFAULT: '#0A0A0B',
     50: '#F5F5F5',
@@ -56,15 +55,15 @@ export const colors = {
     darker: '#C4C4C4',
   },
 
-  // Accent colors (Hanzo Red)
+  // Accent — monochrome ink (max contrast). Flips to white in dark mode via theme.
   accent: {
-    DEFAULT: '#d81c33',  // Hanzo Red
-    light: '#e6475c',    // hanzoRed.500
-    dark: '#b5152b',     // hanzoRed.700
-    hover: '#c01830',    // Darker for hover states
+    DEFAULT: '#0A0A0B',
+    light: '#262626',
+    dark: '#000000',
+    hover: '#171717',
   },
 
-  // Semantic colors
+  // Semantic status colors (functional indicators — not brand)
   success: {
     DEFAULT: '#10B981',
     light: '#34D399',
@@ -131,8 +130,8 @@ export const colors = {
     tertiary: '#737373',
     disabled: '#A3A3A3',
     inverse: '#FFFFFF',
-    link: '#d81c33',
-    linkHover: '#b5152b',
+    link: '#0A0A0B',
+    linkHover: '#404040',
   },
 
   // Border colors
@@ -140,7 +139,7 @@ export const colors = {
     DEFAULT: '#E5E5E5',
     light: '#F5F5F5',
     dark: '#D4D4D4',
-    focus: '#d81c33',
+    focus: '#0A0A0B',
   },
 
   // Special colors
@@ -153,20 +152,18 @@ export const colors = {
     darkBorder: '#404040',
   },
 
-  // Gradients
+  // Gradients — monochrome only
   gradients: {
     primary: 'linear-gradient(135deg, #0A0A0B 0%, #262626 100%)',
-    accent: 'linear-gradient(135deg, #d81c33 0%, #b5152b 100%)',
-    hanzo: 'linear-gradient(135deg, #e6475c 0%, #d81c33 100%)',
-    sunset: 'linear-gradient(135deg, #F59E0B 0%, #d81c33 100%)',
-    ocean: 'linear-gradient(135deg, #3B82F6 0%, #10B981 100%)',
+    subtle: 'linear-gradient(135deg, #171717 0%, #404040 100%)',
+    paper: 'linear-gradient(135deg, #FFFFFF 0%, #F5F5F5 100%)',
   },
 } as const
 
 // CSS variable generator
 export function getCSSVariables(prefix = 'hanzo') {
   const cssVars: Record<string, string> = {}
-  
+
   // Flatten the color object
   function flatten(obj: any, parentKey = '') {
     Object.entries(obj).forEach(([key, value]) => {
@@ -179,7 +176,7 @@ export function getCSSVariables(prefix = 'hanzo') {
       }
     })
   }
-  
+
   flatten(colors)
   return cssVars
 }

@@ -47,7 +47,7 @@ src/
   marks.ts        # BRAND_MARKS (hanzo/lux/zoo/pars marks), renderMarkSVG
   registry.ts     # BrandIdentity, BRANDS, getBrand, toBrandContract, BrandContract
   logos.tsx       # HanzoLogo/HanzoLogoSVG/HanzoFavicon (consume @hanzo/logo) + BrandLogo
-  colors.ts       # Color palette: Hanzo Red (#d81c33), primary, semantic, neutral, gradients
+  colors.ts       # Monochrome palette: Hanzo Black (#0a0a0b) ↔ Hanzo White (#fff), neutral scale, status semantics
   typography.ts   # Font families (Geist Sans, Geist Mono), sizes, weights, line heights
   themes.ts       # Light/dark theme definitions, applyTheme() helper
   tokens.ts       # Design tokens (spacing, radius, shadows, transitions)
