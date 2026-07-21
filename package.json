@@ -1,6 +1,6 @@
 {
   "name": "@hanzo/brand",
-  "version": "1.3.4",
+  "version": "1.4.0",
   "description": "Official brand assets and design system for Hanzo AI",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
@@ -39,7 +39,8 @@
     "build": "tsup src/index.ts src/loader.ts src/hero.ts src/cli.ts --format cjs,esm --dts --clean",
     "dev": "tsup src/index.ts src/loader.ts src/hero.ts src/cli.ts --format cjs,esm --dts --watch",
     "lint": "eslint src",
-    "type-check": "tsc --noEmit"
+    "type-check": "tsc --noEmit",
+    "test": "npm run build && node --test test/*.test.mjs"
   },
   "keywords": [
     "hanzo",
