@@ -15,6 +15,21 @@
       "types": "./dist/index.d.ts"
     },
     "./brand.json": "./brand.json",
+    "./brand-id": {
+      "import": "./dist/brand-id.mjs",
+      "require": "./dist/brand-id.js",
+      "types": "./dist/brand-id.d.ts"
+    },
+    "./registry": {
+      "import": "./dist/registry.mjs",
+      "require": "./dist/registry.js",
+      "types": "./dist/registry.d.ts"
+    },
+    "./marks": {
+      "import": "./dist/marks.mjs",
+      "require": "./dist/marks.js",
+      "types": "./dist/marks.d.ts"
+    },
     "./hero": {
       "import": "./dist/hero.mjs",
       "require": "./dist/hero.js",
@@ -36,8 +51,8 @@
     "brand.json"
   ],
   "scripts": {
-    "build": "tsup src/index.ts src/loader.ts src/hero.ts src/cli.ts --format cjs,esm --dts --clean",
-    "dev": "tsup src/index.ts src/loader.ts src/hero.ts src/cli.ts --format cjs,esm --dts --watch",
+    "build": "tsup src/index.ts src/loader.ts src/hero.ts src/cli.ts src/brand-id.ts src/registry.ts src/marks.ts --format cjs,esm --dts --clean",
+    "dev": "tsup src/index.ts src/loader.ts src/hero.ts src/cli.ts src/brand-id.ts src/registry.ts src/marks.ts --format cjs,esm --dts --watch",
     "lint": "eslint src",
     "type-check": "tsc --noEmit",
     "test": "npm run build && node --test test/*.test.mjs"
