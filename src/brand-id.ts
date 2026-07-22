@@ -51,11 +51,18 @@ export const HOST_BRANDS: ReadonlyArray<{ readonly suffix: string; readonly bran
   { suffix: 'yotoda.tech', brand: 'yotoda' },
 ]
 
-/** Normalize a host for matching: trim, lowercase, strip trailing port.
- *  Trim happens BEFORE the port strip so a padded `"host:port "` still loses
- *  its port (the `:\d+$` anchor would otherwise miss past trailing space). */
+/** Normalize a host for matching: trim, lowercase, strip trailing port, strip
+ *  the FQDN root dot(s).
+ *  Order is load-bearing: trim BEFORE the port strip so a padded `"host:port "`
+ *  still loses its port (the `:\d+$` anchor would otherwise miss past trailing
+ *  space); strip the port BEFORE the trailing dot so an FQDN-with-port
+ *  (`"lux.network.:8080"`) collapses to the bare host. Stripping the trailing
+ *  root dot(s) is semantically neutral — `lux.network.` and `lux.network` are
+ *  the same host — so it resolves a real brand FQDN to ITS brand (not the
+ *  default) without ever widening a match to a sibling brand: whatever a host's
+ *  registrable domain is, removing trailing root dots cannot change it. */
 export function normalizeHost(host?: string | null): string {
-  return (host ?? '').trim().toLowerCase().replace(/:\d+$/, '')
+  return (host ?? '').trim().toLowerCase().replace(/:\d+$/, '').replace(/\.+$/, '')
 }
 
 /**
