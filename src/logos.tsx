@@ -1,16 +1,23 @@
 /**
- * Hanzo brand logos and logo components.
+ * Hanzo brand logos + the white-label brand mark.
  *
- * The one true mark is the monochrome "blocky-H" (67x67, 7 paths). Do NOT
- * reintroduce the made-up square-in-square H or any hand-drawn H. The favicon
- * is the blocky-H on a black rounded square.
+ * The one true Hanzo mark is the block-H — and its geometry lives in exactly
+ * ONE place, `@hanzo/logo` (`MARK_PATHS` / `MARK_VIEWBOX`). This module NO
+ * LONGER re-types those paths; it consumes them. The white-label `<BrandLogo>`
+ * renders the resolved brand's mark (Hanzo H, Lux triangle, Zoo circles, Pars
+ * star) so a lux/zoo/pars surface never shows the Hanzo H.
  */
 
 import React from 'react'
+import { MARK_PATHS, MARK_VIEWBOX, getFaviconSVG } from '@hanzo/logo'
+
+import type { BrandId } from './brand-id'
+import { BRAND_MARKS } from './marks'
+import { getBrand } from './registry'
 
 // Real brand assets shipped in this package (assets/logo/*).
 export const logos = {
-  // The blocky-H mark (transparent background, monochrome).
+  // The block-H mark (transparent background, monochrome).
   mark: {
     svg: '/assets/logo/logo.svg',
   },
@@ -18,7 +25,7 @@ export const logos = {
   wordmark: {
     svg: '/assets/logo/wordmark.svg',
   },
-  // Favicon: blocky-H on a black rounded square.
+  // Favicon: block-H on a black rounded square.
   favicon: {
     svg: '/assets/logo/favicon.svg',
     png: '/assets/logo/favicon.png',
@@ -67,9 +74,9 @@ export function HanzoLogo({
 }
 
 /**
- * Inline SVG of the real blocky-H mark. `fill="currentColor"` (default) so it
- * adapts to the surrounding theme. The two opacity-0.8 paths are the canonical
- * accents.
+ * Inline SVG of the Hanzo block-H mark. Geometry comes from `@hanzo/logo`
+ * (`MARK_PATHS`), so there is one source. `fill="currentColor"` (default) so it
+ * adapts to the surrounding theme.
  */
 export function HanzoLogoSVG({
   size = 32,
@@ -84,42 +91,64 @@ export function HanzoLogoSVG({
     <svg
       width={size}
       height={size}
-      viewBox="0 0 67 67"
+      viewBox={MARK_VIEWBOX}
       fill={color}
       xmlns="http://www.w3.org/2000/svg"
       className={className}
       aria-label="Hanzo"
       role="img"
-    >
-      <path d="M22.21 67V44.6369H0V67H22.21Z" />
-      <path d="M0 44.6369L22.21 46.8285V44.6369H0Z" opacity="0.8" />
-      <path d="M66.7038 22.3184H22.2534L0.0878906 44.6367H44.4634L66.7038 22.3184Z" />
-      <path d="M22.21 0H0V22.3184H22.21V0Z" />
-      <path d="M66.7198 0H44.5098V22.3184H66.7198V0Z" />
-      <path d="M66.6753 22.3185L44.5098 20.0822V22.3185H66.6753Z" opacity="0.8" />
-      <path d="M66.7198 67V44.6369H44.5098V67H66.7198Z" />
-    </svg>
+      // MARK_PATHS is a build-time-trusted `@hanzo/logo` constant — never user input.
+      dangerouslySetInnerHTML={{ __html: MARK_PATHS }}
+    />
   )
 }
 
 /**
- * Favicon component: the real blocky-H on a black rounded square (visible on
- * any browser tab background).
+ * Favicon component: the block-H favicon SVG from `@hanzo/logo` (block-H on a
+ * black rounded square), inlined as a data URI.
  */
 export function HanzoFavicon() {
-  const svg = encodeURIComponent(
-    `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'>` +
-      `<rect width='64' height='64' rx='8' fill='#000000'/>` +
-      `<g transform='translate(8,8) scale(0.716)' fill='#ffffff'>` +
-      `<path d='M22.21 67V44.6369H0V67H22.21Z'/>` +
-      `<path d='M66.7038 22.3184H22.2534L0.0878906 44.6367H44.4634L66.7038 22.3184Z'/>` +
-      `<path d='M22.21 0H0V22.3184H22.21V0Z'/>` +
-      `<path d='M66.7198 0H44.5098V22.3184H66.7198V0Z'/>` +
-      `<path d='M66.7198 67V44.6369H44.5098V67H66.7198Z'/>` +
-      `</g></svg>`,
-  )
+  const svg = encodeURIComponent(getFaviconSVG())
+  return <link rel="icon" type="image/svg+xml" href={`data:image/svg+xml,${svg}`} />
+}
+
+export interface BrandLogoProps {
+  /**
+   * Which brand's mark to render. Omit to auto-resolve by hostname
+   * (white-label): the browser resolves `window.location.hostname`, so a
+   * lux/zoo/pars host renders ITS mark, a Hanzo host the Hanzo H.
+   */
+  brand?: BrandId
+  size?: number | string
+  /** Fill for currentColor marks; ignored by the intrinsically-colored Zoo mark. */
+  color?: string
+  className?: string
+  style?: React.CSSProperties
+}
+
+/**
+ * The white-label brand mark. Renders the resolved brand's inline SVG mark. The
+ * Hanzo geometry is `@hanzo/logo`; Lux/Zoo/Pars are the registry marks. This is
+ * the ONE component surfaces use for "the current brand's logo" — it never
+ * cross-contaminates (a Lux host never shows the Hanzo H).
+ */
+export function BrandLogo({ brand, size = 32, color = 'currentColor', className, style }: BrandLogoProps) {
+  const mark = brand ? BRAND_MARKS[brand] : getBrand().mark
   return (
-    <link rel="icon" type="image/svg+xml" href={`data:image/svg+xml,${svg}`} />
+    <svg
+      width={size}
+      height={size}
+      viewBox={mark.viewBox}
+      // Colored marks (Zoo) carry their own fills; monochrome marks inherit `color`.
+      fill={mark.colored ? undefined : color}
+      xmlns="http://www.w3.org/2000/svg"
+      className={className}
+      style={{ display: 'block', flexShrink: 0, ...style }}
+      role="img"
+      aria-label={brand ?? getBrand().name}
+      // Mark content is a build-time-trusted package constant — never user input.
+      dangerouslySetInnerHTML={{ __html: mark.content }}
+    />
   )
 }
 
