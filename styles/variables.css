@@ -1,7 +1,8 @@
 /**
  * @hanzo/brand CSS Variables
  *
- * Official Hanzo Red: rgb(216, 28, 54) = #d81c33
+ * Hanzo is monochrome — the brand is ink, paper, and a neutral grayscale.
+ * There is no brand hue; the brand color is the ink (dark) / paper (light).
  *
  * Usage:
  *   @import '@hanzo/brand/styles/variables.css';
@@ -9,27 +10,29 @@
  */
 
 :root {
-  /* ===== Hanzo Brand Red ===== */
-  --hanzo-red: #d81c33;
-  --hanzo-red-rgb: 216, 28, 54;
-  --hanzo-red-50: #fdf2f3;
-  --hanzo-red-100: #fce4e6;
-  --hanzo-red-200: #fbcdd2;
-  --hanzo-red-300: #f7a8b1;
-  --hanzo-red-400: #f17485;
-  --hanzo-red-500: #e6475c;
-  --hanzo-red-600: #d81c33;
-  --hanzo-red-700: #b5152b;
-  --hanzo-red-800: #961528;
-  --hanzo-red-900: #7d1626;
-  --hanzo-red-950: #450710;
+  /* ===== Hanzo Brand (Monochrome: Hanzo Black ↔ Hanzo White) ===== */
+  --hanzo-black: #0a0a0b;
+  --hanzo-black-rgb: 10, 10, 11;
+  --hanzo-white: #ffffff;
+  --hanzo-white-rgb: 255, 255, 255;
+  --hanzo-mono-50: #fafafa;
+  --hanzo-mono-100: #f5f5f5;
+  --hanzo-mono-200: #e5e5e5;
+  --hanzo-mono-300: #d4d4d4;
+  --hanzo-mono-400: #a3a3a3;
+  --hanzo-mono-500: #737373;
+  --hanzo-mono-600: #525252;
+  --hanzo-mono-700: #404040;
+  --hanzo-mono-800: #262626;
+  --hanzo-mono-900: #171717;
+  --hanzo-mono-950: #0a0a0a;
 
-  /* ===== Semantic Aliases ===== */
-  --brand: var(--hanzo-red);
-  --brand-light: var(--hanzo-red-500);
-  --brand-dark: var(--hanzo-red-700);
-  --brand-hover: #c01830;
-  --brand-secondary: var(--hanzo-red-400);
+  /* ===== Semantic Aliases (monochrome; flips with scheme) ===== */
+  --brand: var(--hanzo-black);
+  --brand-light: var(--hanzo-mono-800);
+  --brand-dark: #000000;
+  --brand-hover: var(--hanzo-mono-900);
+  --brand-secondary: var(--hanzo-mono-600);
 
   /* ===== Dark Theme Backgrounds ===== */
   --bg-primary: #0a0a0a;
@@ -45,7 +48,7 @@
   /* ===== Borders ===== */
   --border: #262626;
   --border-light: #e5e5e5;
-  --border-focus: var(--hanzo-red);
+  --border-focus: var(--hanzo-black);
 
   /* ===== Text Colors (Dark Theme) ===== */
   --text-primary: #fafafa;
@@ -91,8 +94,8 @@
   --info-dark: #2563eb;
 
   /* ===== Gradients ===== */
-  --gradient-brand: linear-gradient(135deg, var(--hanzo-red-500) 0%, var(--hanzo-red) 100%);
-  --gradient-accent: linear-gradient(135deg, var(--hanzo-red) 0%, var(--hanzo-red-700) 100%);
+  --gradient-brand: linear-gradient(135deg, var(--hanzo-mono-800) 0%, var(--hanzo-black) 100%);
+  --gradient-accent: linear-gradient(135deg, var(--hanzo-black) 0%, #000000 100%);
   --gradient-dark: linear-gradient(135deg, #0a0a0b 0%, #262626 100%);
 
   /* ===== Spacing ===== */
