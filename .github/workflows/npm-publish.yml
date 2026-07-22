@@ -34,11 +34,19 @@ jobs:
           else
             echo "skip=false" >> "$GITHUB_OUTPUT"
           fi
+      # dist/ is gitignored (built, never committed), so the checkout has NO
+      # dist/. Without this build the publish tarball ships an EMPTY dist/ — the
+      # package resolves as a version but every subpath 404s (this shipped the
+      # broken 1.4.0: `Module not found: @hanzo/brand/registry`). Build first.
+      - name: Install + build
+        if: steps.check.outputs.skip != 'true'
+        run: |
+          npm ci
+          npm run build
       - name: Publish
         if: steps.check.outputs.skip != 'true'
-        # --provenance requires the package to already exist on the registry
-        # with provenance enabled. Pass --no-provenance until first manual
-        # publish lands; flip back to --provenance after.
-        run: npm publish --access public
+        # --no-provenance: provenance requires the package to already exist on the
+        # registry with provenance enabled; a token publish would 422 otherwise.
+        run: npm publish --access public --no-provenance
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
