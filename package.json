@@ -1,6 +1,6 @@
 {
   "name": "@hanzo/brand",
-  "version": "1.4.2",
+  "version": "1.4.3",
   "description": "Official brand assets and design system for Hanzo AI",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
