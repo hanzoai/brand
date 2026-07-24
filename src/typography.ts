@@ -12,20 +12,23 @@ export const typography = {
   },
 
   // Font sizes
+  // TIGHT app-first scale (mirrors styles/variables.css --font-size-*): the compact
+  // developer-app register (linear.app / vercel.com). Base 14px, nav 13px, labels
+  // 11px. Line-heights kept snug for density. This is the Hanzo default everywhere.
   fontSize: {
-    xs: ['0.75rem', { lineHeight: '1rem' }],
-    sm: ['0.875rem', { lineHeight: '1.25rem' }],
-    base: ['1rem', { lineHeight: '1.5rem' }],
-    lg: ['1.125rem', { lineHeight: '1.75rem' }],
-    xl: ['1.25rem', { lineHeight: '1.75rem' }],
-    '2xl': ['1.5rem', { lineHeight: '2rem' }],
-    '3xl': ['1.875rem', { lineHeight: '2.25rem' }],
-    '4xl': ['2.25rem', { lineHeight: '2.5rem' }],
-    '5xl': ['3rem', { lineHeight: '1' }],
-    '6xl': ['3.75rem', { lineHeight: '1' }],
-    '7xl': ['4.5rem', { lineHeight: '1' }],
-    '8xl': ['6rem', { lineHeight: '1' }],
-    '9xl': ['8rem', { lineHeight: '1' }],
+    xs: ['0.6875rem', { lineHeight: '1rem' }], // 11px
+    sm: ['0.8125rem', { lineHeight: '1.15rem' }], // 13px
+    base: ['0.875rem', { lineHeight: '1.35rem' }], // 14px
+    lg: ['0.9375rem', { lineHeight: '1.4rem' }], // 15px
+    xl: ['1.0625rem', { lineHeight: '1.55rem' }], // 17px
+    '2xl': ['1.3125rem', { lineHeight: '1.7rem' }], // 21px
+    '3xl': ['1.625rem', { lineHeight: '1.95rem' }], // 26px
+    '4xl': ['2rem', { lineHeight: '2.25rem' }], // 32px
+    '5xl': ['2.5rem', { lineHeight: '1.05' }], // 40px
+    '6xl': ['3.25rem', { lineHeight: '1.03' }], // 52px
+    '7xl': ['4rem', { lineHeight: '1' }], // 64px
+    '8xl': ['5.25rem', { lineHeight: '1' }], // 84px
+    '9xl': ['7rem', { lineHeight: '1' }], // 112px
   },
 
   // Font weights
