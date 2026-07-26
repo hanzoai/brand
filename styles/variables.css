@@ -27,6 +27,37 @@
   --hanzo-mono-900: #171717;
   --hanzo-mono-950: #0a0a0a;
 
+  /* ===== Accent — the ONE Hanzo accent: PURPLE (palette = White · Gray · Purple).
+     The monochrome base stays (primary action = white, neutrals = gray); purple is
+     the single interactive/brand accent — links, active, focus, selection. NO blue,
+     green, or orange. White-label tenants override --hanzo-accent per host so
+     lux/zoo/pars never inherit Hanzo purple. ===== */
+  --hanzo-accent: #8b5cf6;         /* violet-500 */
+  --hanzo-accent-hover: #7c3aed;   /* violet-600 */
+  --hanzo-accent-muted: #a78bfa;   /* violet-400 — accent text on dark */
+  --hanzo-accent-soft: rgba(139, 92, 246, 0.12); /* subtle fill / selected row */
+  --hanzo-accent-rgb: 139, 92, 246;
+
+  /* ===== Layered surface blacks (Builder v2 — no gray panels; each subtly different) ===== */
+  --surface-0: #080808;  /* app background */
+  --surface-1: #0d0d0d;  /* panels */
+  --surface-2: #111111;  /* raised */
+  --surface-3: #171717;  /* controls / hover */
+
+  /* ===== Hairline border — 1px, almost invisible (no thick outlines) ===== */
+  --border-hairline: rgba(255, 255, 255, 0.06);
+  --border-hairline-strong: rgba(255, 255, 255, 0.1);
+
+  /* ===== Semantic radius (Builder v2): cards 8 · controls/toolbar 10 · preview/panels 12 ===== */
+  --radius-card: 0.5rem;      /* 8px */
+  --radius-control: 0.625rem; /* 10px — buttons, toolbar, inputs */
+  --radius-panel: 0.75rem;    /* 12px — preview, large panels */
+
+  /* ===== Semantic type roles (Builder v2): heading 20 · body 14 · secondary 12 ===== */
+  --text-heading: 1.25rem;    /* 20px @ 600 */
+  --text-body: 0.875rem;      /* 14px @ 400 */
+  --text-secondary: 0.75rem;  /* 12px @ 400/500 */
+
   /* ===== Semantic Aliases (monochrome; flips with scheme) ===== */
   --brand: var(--hanzo-black);
   --brand-light: var(--hanzo-mono-800);
@@ -135,7 +166,7 @@
 
   /* ===== Typography ===== */
   --font-sans: 'Geist Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-mono: 'Geist Mono', Monaco, monospace;
+  --font-mono: 'JetBrains Mono', 'Geist Mono', ui-monospace, Monaco, monospace;
 
   /* ===== Font Size scale (mirrors typography.ts `fontSize`) =====
      TIGHT app-first default — the compact developer-app register (linear.app /
@@ -189,5 +220,16 @@
   --text-primary: var(--text-light-primary);
   --text-secondary: var(--text-light-secondary);
   --text-muted: var(--text-light-muted);
+  /* purple accent flips a shade deeper for contrast on paper */
+  --hanzo-accent: #7c3aed;
+  --hanzo-accent-hover: #6d28d9;
+  --hanzo-accent-muted: #7c3aed;
+  /* layered "blacks" become layered near-whites in light */
+  --surface-0: #ffffff;
+  --surface-1: #fafafa;
+  --surface-2: #f5f5f5;
+  --surface-3: #ededed;
+  --border-hairline: rgba(0, 0, 0, 0.08);
+  --border-hairline-strong: rgba(0, 0, 0, 0.12);
   color-scheme: light;
 }
