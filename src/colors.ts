@@ -1,10 +1,13 @@
 /**
  * Hanzo brand colors.
  *
- * Hanzo is MONOCHROME — the identity is black, white, and a neutral grayscale.
- * There is no brand hue. The accent flips black↔white with the color scheme
- * (see brand.json theme). Status semantics (success/warning/error/info) are
- * standard functional indicators, not brand colors.
+ * Hanzo is MONOCHROME + ONE accent. The base is black, white, and a neutral
+ * grayscale; the primary action is white (max-contrast ink that flips b/w with
+ * the scheme). The single brand/interactive accent is PURPLE (`purple`) — links,
+ * active, focus, selection — NO blue/green/orange in chrome. Palette: White ·
+ * Gray · Purple. Surfaces are LAYERED near-blacks (`surface`), never gray panels.
+ * White-label tenants override the accent per host (lux/zoo/pars ≠ Hanzo purple).
+ * Status semantics (success/warning/error/info) are functional indicators only.
  */
 
 // The two named brand poles.
@@ -61,6 +64,36 @@ export const colors = {
     light: '#262626',
     dark: '#000000',
     hover: '#171717',
+  },
+
+  // The ONE brand accent — PURPLE (palette = White · Gray · Purple). The
+  // monochrome base stays: the primary action is white (see `accent`, flips
+  // b/w). Purple is the single interactive/brand accent — links, active, focus,
+  // selection. NO blue/green/orange in chrome. White-label tenants override the
+  // accent per host so lux/zoo/pars never inherit Hanzo purple.
+  purple: {
+    DEFAULT: '#8B5CF6', // violet-500
+    hover: '#7C3AED', // violet-600
+    muted: '#A78BFA', // violet-400 — accent text on dark
+    soft: 'rgba(139, 92, 246, 0.12)',
+    50: '#F5F3FF',
+    100: '#EDE9FE',
+    200: '#DDD6FE',
+    300: '#C4B5FD',
+    400: '#A78BFA',
+    500: '#8B5CF6',
+    600: '#7C3AED',
+    700: '#6D28D9',
+    800: '#5B21B6',
+    900: '#4C1D95',
+  },
+
+  // Layered surface blacks (Builder v2 — no gray panels; each subtly different).
+  surface: {
+    0: '#080808', // app background
+    1: '#0D0D0D', // panels
+    2: '#111111', // raised
+    3: '#171717', // controls / hover
   },
 
   // Semantic status colors (functional indicators — not brand)
