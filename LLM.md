@@ -5,6 +5,49 @@ Hanzo. Published as `@hanzo/brand` on npm. Exports the multi-brand registry +
 host resolver (hanzo / lux / zoo / pars + white-label tenants), colors,
 typography, themes, design tokens, logo components, and CSS variables.
 
+## How this ships
+
+One way, and it runs on our own stack:
+
+    push  ->  github.com/hanzoai/brand         (a mirror)
+              .github/workflows/sync.yml        carries refs onward
+      ->  git.hanzo.ai/hanzoai/brand            CANONICAL
+              .hanzo/workflows/publish.yml      publishes @hanzo/brand to npm
+              .hanzo/workflows/deploy.yml       builds ghcr.io/hanzoai/brand
+      ->  hanzoai/universe crs/brand.yaml       names the tag that is live
+      ->  hanzoai/operator                      reconciles the App
+      ->  hanzoai/static behind hanzoai/ingress serves brand.hanzo.ai
+
+**git.hanzo.ai is canonical; GitHub is a mirror.** `.github/workflows/` holds
+exactly one file, `sync.yml`, and its only job is getting refs to the forge. Every
+build, check and publish is a workflow under `.hanzo/workflows/`, which the forge
+reads. `.hanzo/workflows` uses GitHub Actions syntax, so a workflow moves between
+the two by changing directory and nothing else.
+
+`publish.yml` is the SOLE publisher of `@hanzo/brand`. It fires when the `version`
+field in `package.json` changes on `main`, no-ops when that version is already on
+the registry, and builds `dist/` first — `dist/` is gitignored, so a publish
+without the build ships a package whose every subpath 404s (that shipped once, as
+1.4.0). It needs `NPM_TOKEN` as a forge secret.
+
+### The site
+
+`index.html` is the whole site: one self-contained page, inline CSS, no scripts
+and no subresources. `Dockerfile` copies it into `ghcr.io/hanzoai/static` — no
+build stage, because there is nothing to build. No GitHub Pages and no Cloudflare
+Pages: the repo used to push this page to a `gh-pages` branch, Pages never built
+it, and `brand.hanzo.ai` has answered 404 from our own ingress ever since.
+
+A build never deploys itself. `deploy.yml` publishes
+`ghcr.io/hanzoai/brand:<sha>`; a human then sets `spec.image.tag` in
+`hanzoai/universe` `infra/k8s/operator/crs/brand.yaml` and adds `- brand.yaml` to
+that directory's `kustomization.yaml`. The CR is inert until both are done, which
+is deliberate: an App promoted with an empty tag takes the host down instead of
+leaving it alone.
+
+Order: publish an image -> set the tag -> add the line -> confirm the pod is
+Running.
+
 ## Stack
 - TypeScript 5, tsup (CJS + ESM + DTS output)
 - Runtime dep: `@hanzo/logo` (the ONE home of the Hanzo block-H geometry —
