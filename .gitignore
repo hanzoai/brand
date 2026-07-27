@@ -52,3 +52,8 @@ CLAUDE.md
 GEMINI.md
 GROK.md
 QWEN.md
+
+# pnpm only — pnpm-lock.yaml is the tracked lockfile.
+package-lock.json
+yarn.lock
+bun.lockb

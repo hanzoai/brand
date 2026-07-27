@@ -1,0 +1,9 @@
+# Install scripts run only for packages listed here.
+allowBuilds:
+  esbuild: true
+
+# Our own scopes skip pnpm's new-release quarantine. Scope glob, not a version
+# pin: pnpm rewrites version entries on every bump and breaks --frozen-lockfile.
+minimumReleaseAgeExclude:
+  - '@hanzo/*'
+  - '@hanzogui/*'
