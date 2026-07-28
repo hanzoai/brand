@@ -1,6 +1,6 @@
 {
   "name": "@hanzo/brand",
-  "version": "1.4.4",
+  "version": "1.4.5",
   "packageManager": "pnpm@11.17.0",
   "description": "Official brand assets and design system for Hanzo AI",
   "main": "dist/index.js",
@@ -11,35 +11,65 @@
   },
   "exports": {
     ".": {
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.js",
-      "types": "./dist/index.d.ts"
+      "import": {
+        "types": "./dist/index.d.mts",
+        "default": "./dist/index.mjs"
+      },
+      "require": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      }
     },
     "./brand.json": "./brand.json",
     "./brand-id": {
-      "import": "./dist/brand-id.mjs",
-      "require": "./dist/brand-id.js",
-      "types": "./dist/brand-id.d.ts"
+      "import": {
+        "types": "./dist/brand-id.d.mts",
+        "default": "./dist/brand-id.mjs"
+      },
+      "require": {
+        "types": "./dist/brand-id.d.ts",
+        "default": "./dist/brand-id.js"
+      }
     },
     "./registry": {
-      "import": "./dist/registry.mjs",
-      "require": "./dist/registry.js",
-      "types": "./dist/registry.d.ts"
+      "import": {
+        "types": "./dist/registry.d.mts",
+        "default": "./dist/registry.mjs"
+      },
+      "require": {
+        "types": "./dist/registry.d.ts",
+        "default": "./dist/registry.js"
+      }
     },
     "./marks": {
-      "import": "./dist/marks.mjs",
-      "require": "./dist/marks.js",
-      "types": "./dist/marks.d.ts"
+      "import": {
+        "types": "./dist/marks.d.mts",
+        "default": "./dist/marks.mjs"
+      },
+      "require": {
+        "types": "./dist/marks.d.ts",
+        "default": "./dist/marks.js"
+      }
     },
     "./hero": {
-      "import": "./dist/hero.mjs",
-      "require": "./dist/hero.js",
-      "types": "./dist/hero.d.ts"
+      "import": {
+        "types": "./dist/hero.d.mts",
+        "default": "./dist/hero.mjs"
+      },
+      "require": {
+        "types": "./dist/hero.d.ts",
+        "default": "./dist/hero.js"
+      }
     },
     "./loader": {
-      "import": "./dist/loader.mjs",
-      "require": "./dist/loader.js",
-      "types": "./dist/loader.d.ts"
+      "import": {
+        "types": "./dist/loader.d.mts",
+        "default": "./dist/loader.mjs"
+      },
+      "require": {
+        "types": "./dist/loader.d.ts",
+        "default": "./dist/loader.js"
+      }
     },
     "./assets/*": "./assets/*",
     "./styles/*": "./styles/*"
