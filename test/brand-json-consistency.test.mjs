@@ -11,7 +11,7 @@ import assert from 'node:assert/strict'
 import { readFileSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
 
-import { BRANDS, toBrandContract } from '../dist/index.mjs'
+import { BRANDS, toBrandContract, brandConfig } from '../dist/index.mjs'
 
 const brandJson = JSON.parse(readFileSync(fileURLToPath(new URL('../brand.json', import.meta.url)), 'utf8'))
 
@@ -24,6 +24,23 @@ test('registry Hanzo entry agrees with brand.json', () => {
   assert.equal(h.legalName, j.legalEntity, 'legalName == brand.json legalEntity')
   assert.equal(h.domain, j.appDomain, 'domain == brand.json appDomain')
   assert.equal(h.docsDomain, j.docsDomain, 'docsDomain')
+  assert.equal(h.social.twitter, j.twitter, 'twitter')
+  assert.equal(h.social.github, j.github, 'github')
+})
+
+test('all THREE identity sources agree on the socials', () => {
+  // brandConfig is the third place Hanzo's identity is written, and it drifted
+  // unnoticed because this file pinned only six fields: brand.json said
+  // x.com/hanaboroshi, the registry said x.com/hanzoai, and brandConfig still
+  // pointed at the dead twitter.com domain. Pin every source, not two of three.
+  const h = BRANDS.hanzo
+  const j = brandJson.brand
+  const c = brandConfig.social
+  assert.equal(c.twitter, h.social.twitter, 'brandConfig.social.twitter == registry')
+  assert.equal(c.twitter, j.twitter, 'brandConfig.social.twitter == brand.json')
+  assert.equal(c.github, h.social.github, 'brandConfig.social.github == registry')
+  assert.equal(c.github, j.github, 'brandConfig.social.github == brand.json')
+  assert.match(c.twitter, /^https:\/\/x\.com\//, 'x.com, never twitter.com')
 })
 
 test('registry Hanzo theme agrees with brand.json theme', () => {
