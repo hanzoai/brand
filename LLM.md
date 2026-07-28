@@ -10,25 +10,28 @@ typography, themes, design tokens, logo components, and CSS variables.
 One way, and it runs on our own stack:
 
     push  ->  github.com/hanzoai/brand         (a mirror)
-              .github/workflows/sync.yml        carries refs onward
       ->  git.hanzo.ai/hanzoai/brand            CANONICAL
+              .hanzo/workflows/sync-from-github.yml  pulls the mirror, every 10m
               .hanzo/workflows/publish.yml      publishes @hanzo/brand to npm
               .hanzo/workflows/deploy.yml       builds ghcr.io/hanzoai/brand
       ->  hanzoai/universe crs/brand.yaml       names the tag that is live
       ->  hanzoai/operator                      reconciles the App
       ->  hanzoai/static behind hanzoai/ingress serves brand.hanzo.ai
 
-**git.hanzo.ai is canonical; GitHub is a mirror.** `.github/workflows/` holds
-exactly one file, `sync.yml`, and its only job is getting refs to the forge. Every
-build, check and publish is a workflow under `.hanzo/workflows/`, which the forge
-reads. `.hanzo/workflows` uses GitHub Actions syntax, so a workflow moves between
+**git.hanzo.ai is canonical; GitHub is a mirror.** `.github/workflows/` is empty.
+Every build, check, publish and the sync itself lives under `.hanzo/workflows/`,
+which the forge reads. It uses GitHub Actions syntax, so a workflow moves between
 the two by changing directory and nothing else.
 
-`publish.yml` is the SOLE publisher of `@hanzo/brand`. It fires when the `version`
-field in `package.json` changes on `main`, no-ops when that version is already on
-the registry, and builds `dist/` first — `dist/` is gitignored, so a publish
-without the build ships a package whose every subpath 404s (that shipped once, as
-1.4.0). It needs `NPM_TOKEN` as a forge secret.
+The sync is a PULL: the forge runner reaches both ends, so nothing needs a
+credential aimed into the forge, and a public repo needs none at all. It
+fast-forwards only — a divergence fails loudly instead of force-pushing a side.
+
+`publish.yml` is the SOLE publisher of `@hanzo/brand`. It fires when `version` in
+`package.json` changes on `main`, skips a version already on the registry, and
+runs `pnpm test` first — one command that builds `dist/` and then gates on the
+suite. `dist/` is gitignored, so publishing without it ships a package whose every
+subpath 404s. Needs `NPM_TOKEN` as a forge secret.
 
 ### The site
 
@@ -99,17 +102,17 @@ src/
   utils.ts, docs.ts
 brand.json        # Hanzo runtime BrandContract (id portal fetches this; kept in
                   #   sync with the registry Hanzo entry by a consistency test)
-test/             # node:test suites run against the BUILT dist (npm test)
+test/             # node:test suites run against the BUILT dist (pnpm test)
 styles/variables.css
 ```
 
 ## Commands
 ```bash
-npm install        # Install dev deps
-npm run build      # Build with tsup (CJS + ESM + DTS)
-npm run type-check # tsc --noEmit  (the real static gate)
-npm test           # build + node --test (13 tests: white-label invariant, suffix
-                   #   confusion, brand.json consistency)
+pnpm install       # install dev deps
+pnpm build         # tsup (CJS + ESM + DTS)
+pnpm type-check    # tsc --noEmit  (the real static gate)
+pnpm test          # build + node --test (19 tests: white-label invariant, suffix
+                   #   and homoglyph confusion, brand.json consistency)
 ```
 
 ## Notes
@@ -117,7 +120,7 @@ npm test           # build + node --test (13 tests: white-label invariant, suffi
   re-types the block-H path data (marks.ts / logos.tsx both consume it).
 - The registry's Hanzo entry and `brand.json` are kept in sync by
   test/brand-json-consistency.test.mjs.
-- `npm run lint` is currently a no-op error (no ESLint config in-repo); use
+- `pnpm lint` is currently a no-op error (no ESLint config in-repo); use
   `type-check`.
 - Auto-applies dark/light theme on import in browser environments.
 - Published with public access to npm registry.

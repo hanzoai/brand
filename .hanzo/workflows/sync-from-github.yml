@@ -1,0 +1,54 @@
+name: sync from github
+
+# Pulls github.com/hanzoai/brand into the forge, which is canonical.
+#
+# A pull, not a push: the forge runner reaches both ends, so nothing needs a
+# credential aimed into the forge. This repo is public, so the fetch needs none
+# at all. Fast-forward only — a divergence fails loudly instead of force-pushing.
+
+on:
+  schedule:
+    - cron: '*/10 * * * *'
+  workflow_dispatch: {}
+
+concurrency:
+  group: sync-from-github
+  cancel-in-progress: false
+
+jobs:
+  main:
+    runs-on: hanzo-build-linux-amd64
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+
+      - name: Fast-forward main from github.com
+        run: |
+          set -euo pipefail
+          git fetch --quiet "https://github.com/${{ github.repository }}.git" main
+          LOCAL="$(git rev-parse HEAD)"
+          REMOTE="$(git rev-parse FETCH_HEAD)"
+          if [ "$LOCAL" = "$REMOTE" ]; then
+            echo "in sync at $LOCAL"
+            exit 0
+          fi
+          if ! git merge-base --is-ancestor "$LOCAL" "$REMOTE"; then
+            echo "DIVERGED: $LOCAL is not an ancestor of $REMOTE; resolve by hand" >&2
+            exit 1
+          fi
+          echo "fast-forwarding $LOCAL -> $REMOTE"
+          git push origin "$REMOTE:refs/heads/main"
+          # The workflow token deliberately does not trigger other workflows, so
+          # synced commits would never gate. Dispatch each sibling; every one
+          # guards itself, so a dispatch with nothing to do is a no-op.
+          for wf in .hanzo/workflows/*.yml; do
+            name="$(basename "$wf")"
+            [ "$name" = "sync-from-github.yml" ] && continue
+            curl -fsS --max-time 20 -X POST \
+              -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+              -H "Content-Type: application/json" \
+              "${{ github.server_url }}/v1/repos/${{ github.repository }}/actions/workflows/$name/dispatches" \
+              -d '{"ref":"main"}' || echo "dispatch $name failed (non-fatal)"
+          done
