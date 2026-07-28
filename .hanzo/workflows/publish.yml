@@ -1,8 +1,7 @@
-name: npm publish
+name: publish
 
-# Publishes @hanzo/brand to npmjs.com whenever the package.json version
-# field changes on main. Run-once-per-version: the workflow no-ops if
-# the same version is already on the registry.
+# Publishes @hanzo/brand when the version in package.json changes on main.
+# A version already on the registry is skipped, so re-runs are safe.
 
 on:
   push:
@@ -12,7 +11,6 @@ on:
 
 permissions:
   contents: read
-  id-token: write   # for npm provenance
 
 jobs:
   publish:
@@ -34,19 +32,19 @@ jobs:
           else
             echo "skip=false" >> "$GITHUB_OUTPUT"
           fi
-      # dist/ is gitignored (built, never committed), so the checkout has NO
-      # dist/. Without this build the publish tarball ships an EMPTY dist/ — the
-      # package resolves as a version but every subpath 404s (this shipped the
-      # broken 1.4.0: `Module not found: @hanzo/brand/registry`). Build first.
-      - name: Install + build
+      # `test` builds dist/ and then gates on the suite — one command for both.
+      # dist/ is gitignored, so publishing without it ships a package whose every
+      # subpath 404s. corepack takes the pnpm version from packageManager.
+      - name: Test
         if: steps.check.outputs.skip != 'true'
         run: |
-          npm ci
-          npm run build
+          corepack enable
+          pnpm install --frozen-lockfile
+          pnpm test
       - name: Publish
         if: steps.check.outputs.skip != 'true'
-        # --no-provenance: provenance requires the package to already exist on the
-        # registry with provenance enabled; a token publish would 422 otherwise.
+        # npm, not pnpm: pnpm publish adds git checks a CI checkout fails.
+        # --no-provenance: a token publish 422s without it.
         run: npm publish --access public --no-provenance
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
