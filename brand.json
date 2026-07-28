@@ -20,7 +20,7 @@
     "downloadUrl": "https://hanzo.ai",
     "complianceEmail": "compliance@hanzo.ai",
     "supportEmail": "hi@hanzo.ai",
-    "twitter": "https://x.com/hanaboroshi",
+    "twitter": "https://x.com/hanzoai",
     "farcaster": "",
     "linkedin": "https://linkedin.com/company/hanzoai",
     "tiktok": "",
@@ -48,7 +48,15 @@
   },
   "chains": {
     "defaultChainId": 1,
-    "supported": [1, 96369, 200200, 42161, 8453, 137, 43114]
+    "supported": [
+      1,
+      96369,
+      200200,
+      42161,
+      8453,
+      137,
+      43114
+    ]
   },
   "rpc": {
     "1": "https://eth.llamarpc.com",
