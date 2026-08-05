@@ -35,7 +35,7 @@ export const brandConfig = {
     twitter: 'https://x.com/hanzoai',
     github: 'https://github.com/hanzoai',
     linkedin: 'https://linkedin.com/company/hanzoai',
-    discord: 'https://discord.gg/hanzo',
+    discord: 'https://discord.gg/CJCyAsm9Vr',
     youtube: 'https://youtube.com/@hanzoai',
   },
 

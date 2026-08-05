@@ -113,7 +113,7 @@ const HANZO: BrandIdentity = {
   social: {
     twitter: 'https://x.com/hanzoai',
     github: 'https://github.com/hanzoai',
-    discord: 'https://discord.gg/hanzo',
+    discord: 'https://discord.gg/CJCyAsm9Vr',
     linkedin: 'https://linkedin.com/company/hanzoai',
   },
   mark: BRAND_MARKS.hanzo,
