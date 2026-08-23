@@ -1,0 +1,20 @@
+# Canonical CI/CD config for hanzoai/brand — the one file both the hanzoai/ci
+# reusable (.hanzo/workflows/cicd.yml) and platform.hanzo.ai read.
+#
+# GATE ONLY: @hanzo/brand is an npm package, and the static brand site it also
+# carries already has its own lanes here (.hanzo/workflows/publish.yml,
+# deploy.yml). Declaring `images:` would build the same Dockerfile twice.
+#
+# The gate is the package's own: type-check, then `pnpm test`, which builds all
+# seven tsup entries and then runs the node:test suites against the result. The
+# two suites are the ones that matter for a brand registry — brand.json
+# consistency (the data file agreeing with itself) and the registry surface —
+# so a token added to the JSON without a registry entry, or the reverse, is red.
+test:
+  - name: build
+    run: |
+      set -e
+      corepack enable
+      pnpm install --frozen-lockfile
+      pnpm type-check
+      pnpm test

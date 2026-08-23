@@ -83,6 +83,18 @@ export interface BrandContract {
   readonly appDomain: string
   readonly logoUrl: string
   readonly faviconUrl: string
+  /**
+   * CDN wordmark URL — the logotype, where a brand has one distinct from its
+   * mark. Optional because most do not: Hanzo, Zoo and Pars all ship a square
+   * mark and nothing else, and a wordmark faked by scaling one is not a wordmark.
+   * A consumer that wants a logotype and will settle for a mark reads
+   * `wordmarkUrl ?? logoUrl`; one that wants the mark reads `logoUrl` and gets it.
+   *
+   * The two are different pictures and they were the same URL on Lux, which is
+   * how "the Lux logo" resolved to a 63x17 wordmark on every surface that asked
+   * for a mark. @luxfi/brand 1.1.2 separates them.
+   */
+  readonly wordmarkUrl?: string
   readonly accentColor?: string
   readonly twitter?: string
   readonly github?: string
@@ -113,7 +125,7 @@ const HANZO: BrandIdentity = {
   social: {
     twitter: 'https://x.com/hanzoai',
     github: 'https://github.com/hanzoai',
-    discord: 'https://discord.gg/hanzo',
+    discord: 'https://discord.gg/CJCyAsm9Vr',
     linkedin: 'https://linkedin.com/company/hanzoai',
   },
   mark: BRAND_MARKS.hanzo,
