@@ -72,7 +72,7 @@ green `#00A652` for success).
 ## 3. Typography
 
 ### 3.1 Family
-Geist Sans + Geist Mono (loaded via `next/font/google`)
+Zen + Zen Mono, self-hosted by `@hanzo/font` (no third-party font host)
 
 ### 3.2 Type scale (Tailwind classes)
 
