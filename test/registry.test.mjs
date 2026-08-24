@@ -19,7 +19,7 @@ import {
   isKnownBrandHost,
   normalizeHost,
   renderMarkSVG,
-  toBrandContract,
+  toBrand,
   DEFAULT_BRAND,
 } from '../dist/index.mjs'
 
@@ -240,14 +240,14 @@ test('renderMarkSVG produces a themed SVG; the colored Zoo mark keeps its fills'
   assert.match(zoo, /#01ACF1|#EA018E|#00A652/) // keeps its CMYK fills
 })
 
-test('toBrandContract projects a BrandIdentity to the id runtime contract', () => {
-  const c = toBrandContract(BRANDS.hanzo)
+test('toBrand projects a BrandIdentity to the id runtime contract', () => {
+  const c = toBrand(BRANDS.hanzo)
   assert.equal(c.name, 'Hanzo')
   assert.equal(c.appDomain, 'hanzo.ai')
   assert.equal(c.description, BRANDS.hanzo.tagline)
   assert.ok(c.logoUrl.startsWith('https://'))
   assert.equal(c.github, BRANDS.hanzo.social.github)
-  // shape: exactly the id BrandContract keys, no leakage of internal fields
+  // shape: exactly the id Brand keys, no leakage of internal fields
   assert.ok(!('mark' in c), 'contract does not leak the inline mark geometry')
   assert.ok(!('theme' in c), 'contract does not leak theme tokens')
 })
