@@ -94,7 +94,7 @@ src/
   registry.ts     # BrandIdentity, BRANDS, getBrand, toBrandContract, BrandContract
   logos.tsx       # HanzoLogo/HanzoLogoSVG/HanzoFavicon (consume @hanzo/logo) + BrandLogo
   colors.ts       # Monochrome palette: Hanzo Black (#0a0a0b) ↔ Hanzo White (#fff), neutral scale, status semantics
-  typography.ts   # Font families (Geist Sans, Geist Mono), sizes, weights, line heights
+  typography.ts   # Font families (Zen, Zen Mono), sizes, weights, line heights
   themes.ts       # Light/dark theme definitions, applyTheme() helper
   tokens.ts       # Design tokens (spacing, radius, shadows, transitions)
   config.ts       # Company info, social links, domains, SEO defaults

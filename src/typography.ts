@@ -5,10 +5,10 @@
 export const typography = {
   // Font families
   fontFamily: {
-    sans: ['Geist Sans', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+    sans: ['Zen', 'ui-sans-serif', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
     serif: ['Georgia', 'Cambria', 'Times New Roman', 'Times', 'serif'],
-    mono: ['Geist Mono', 'Monaco', 'Consolas', 'monospace'],
-    display: ['Geist Sans', 'system-ui', 'sans-serif'],
+    mono: ['Zen Mono', 'ui-monospace', 'SFMono-Regular', 'Monaco', 'Consolas', 'monospace'],
+    display: ['Zen', 'ui-sans-serif', 'system-ui', 'sans-serif'],
   },
 
   // Font sizes
@@ -130,7 +130,7 @@ export const typography = {
   // Code styles
   code: {
     inline: {
-      fontFamily: 'Geist Mono, monospace',
+      fontFamily: 'Zen Mono, ui-monospace, monospace',
       fontSize: '0.875em',
       fontWeight: '500',
       backgroundColor: '#F5F5F5',
@@ -138,7 +138,7 @@ export const typography = {
       borderRadius: '0.25rem',
     },
     block: {
-      fontFamily: 'Geist Mono, monospace',
+      fontFamily: 'Zen Mono, ui-monospace, monospace',
       fontSize: '0.875rem',
       fontWeight: '400',
       lineHeight: '1.5',
@@ -149,23 +149,22 @@ export const typography = {
   },
 } as const
 
-// Font face declarations for custom fonts
-export const fontFaces = `
-@font-face {
-  font-family: 'Geist Sans';
-  font-style: normal;
-  font-weight: 100 900;
-  font-display: swap;
-  src: url('/fonts/geist-sans-var.woff2') format('woff2-variations');
-}
+/**
+ * The stack the SVG card renderers ask for, as a CSS value rather than an array.
+ * It lived twice — `cards.ts` and `hero.ts` each declared the same string, both
+ * leading with Inter, which is not a face this brand has ever owned.
+ *
+ * Zen leads. @hanzo/font ships the woff2, so a rasterizer resolves it by being
+ * pointed at that package (resvg-js takes `fontFiles`/`fontDirs`); a host that
+ * cannot falls through the tail exactly as it did before, so naming Zen here
+ * cannot render worse than the string it replaced.
+ */
+export const svgFontStack = `Zen,'SF Pro Display','Helvetica Neue',Arial,sans-serif`
 
-@font-face {
-  font-family: 'Geist Mono';
-  font-style: normal;
-  font-weight: 100 800;
-  font-display: swap;
-  src: url('/fonts/geist-mono-var.woff2') format('woff2-variations');
-}
-`
+// The FACES are @hanzo/font's — it ships Zen, Zen Mono and the five Zen Pixel
+// variants as woff2 with the @font-face rules to match. This package names the
+// family a surface should ask for; it does not declare one, and it used to:
+// `fontFaces` pointed two @font-face rules at /fonts/geist-*-var.woff2, files
+// this package has never shipped, so it could only ever paint the fallback.
 
 export default typography
