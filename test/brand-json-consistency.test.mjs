@@ -11,7 +11,7 @@ import assert from 'node:assert/strict'
 import { readFileSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
 
-import { BRANDS, toBrandContract, brandConfig } from '../dist/index.mjs'
+import { BRANDS, toBrand, brandConfig } from '../dist/index.mjs'
 
 const brandJson = JSON.parse(readFileSync(fileURLToPath(new URL('../brand.json', import.meta.url)), 'utf8'))
 
@@ -52,9 +52,9 @@ test('registry Hanzo theme agrees with brand.json theme', () => {
   assert.equal(h.theme.dark.surface1, j.dark.surface1, 'dark surface1')
 })
 
-test('brand.json still satisfies the id BrandContract via toBrandContract', () => {
-  // toBrandContract(Hanzo) must produce the same identity brand.json advertises.
-  const c = toBrandContract(BRANDS.hanzo)
+test('brand.json still satisfies the id Brand via toBrand', () => {
+  // toBrand(Hanzo) must produce the same identity brand.json advertises.
+  const c = toBrand(BRANDS.hanzo)
   assert.equal(c.name, brandJson.brand.name)
   assert.equal(c.appDomain, brandJson.brand.appDomain)
 })

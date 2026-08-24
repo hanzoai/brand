@@ -4,7 +4,7 @@
  * (console, id, hanzo.ai, chat, insights). Consolidates what used to be
  * duplicated per surface: console's per-brand identity (`src/lib/branding/
  * brands.ts` + the `BRANDS`/`HOST_BRANDS` tables in `src/config`), id's
- * `BrandContract`, and hanzo.ai / insights hardcoded brand strings.
+ * `Brand`, and hanzo.ai / insights hardcoded brand strings.
  *
  * DRY + orthogonal:
  *   - host → id           lives in `./brand-id` (the pure resolver).
@@ -71,12 +71,14 @@ export interface BrandIdentity {
 }
 
 /**
- * The runtime brand contract every per-org brand package satisfies — the shape
- * `@hanzo/id`'s portal reads via `loadBrand()`. Kept byte-compatible with
- * `@hanzo/id-shared`'s `BrandContract` so id-shared can re-export THIS as the
- * single source. Projected from a `BrandIdentity` by `toBrandContract`.
+ * The runtime brand every per-org package satisfies — the shape `@hanzo/id`'s
+ * portal reads via `loadBrand()`. `@hanzo/id-shared` re-exports THIS rather than
+ * declaring its own, so there is one definition and not two that can drift.
+ *
+ * A `BrandIdentity` is the authored registry entry; this is what a consumer
+ * holds, projected from one by `toBrand`.
  */
-export interface BrandContract {
+export interface Brand {
   readonly name: string
   readonly title: string
   readonly description: string
@@ -265,8 +267,8 @@ export function getBrand(host?: string | null): BrandIdentity {
   return BRANDS[host === undefined ? DEFAULT_BRAND : brandFromHost(host)]
 }
 
-/** Project a `BrandIdentity` to the runtime `BrandContract` (@hanzo/id loader). */
-export function toBrandContract(b: BrandIdentity): BrandContract {
+/** Project a `BrandIdentity` to the runtime `Brand` (@hanzo/id loader). */
+export function toBrand(b: BrandIdentity): Brand {
   return {
     name: b.name,
     title: b.title,
