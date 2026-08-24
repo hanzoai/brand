@@ -9,6 +9,7 @@
  * SVG→PNG renderer (resvg-js, satori, sharp, rsvg-convert).
  */
 import { MARK_PATHS, MARK_VIEWBOX } from '@hanzo/logo'
+import { svgFontStack } from './typography'
 
 export interface HeroOptions {
   /** Repo / product / package name, e.g. `@hanzo/ai` or `Hanzo Node`. */
@@ -92,7 +93,7 @@ export function renderHero(opts: HeroOptions): string {
 
   const pad = 88
   const markSize = 76
-  const font = `'Inter','SF Pro Display','Helvetica Neue',Arial,sans-serif`
+  const font = svgFontStack
   const titleSize = title.length > 26 ? 64 : 80
   void accentColors // accent now reads only via the glow backdrop, not a rule
 

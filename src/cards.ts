@@ -10,11 +10,12 @@
  * rsvg-convert). Add new card types here, not per-repo.
  */
 import { MARK_PATHS, MARK_VIEWBOX } from '@hanzo/logo'
+import { svgFontStack } from './typography'
 
 const W = 1200
 const H = 630
 const PAD = 88
-const FONT = `'Inter','SF Pro Display','Helvetica Neue',Arial,sans-serif`
+const FONT = svgFontStack
 const MARK_SIZE = Number(MARK_VIEWBOX.split(' ')[2]) || 67
 
 /** Per-brand palette. Defaults are pure monochrome — no brand is hardcoded. */
