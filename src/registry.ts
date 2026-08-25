@@ -108,8 +108,12 @@ export interface Brand {
 const MONO_LIGHT: BrandTheme = { accent1: '#000000', surface1: '#FFFFFF', surface2: '#FAFAFA', neutral1: '#0A0A0A', neutral2: 'rgba(10, 10, 10, 0.6)' }
 const MONO_DARK: BrandTheme = { accent1: '#FFFFFF', surface1: '#000000', surface2: '#111111', neutral1: '#FAFAFA', neutral2: 'rgba(250, 250, 250, 0.6)' }
 
-/** jsDelivr CDN base for a brand package's shipped asset. */
-const cdn = (pkg: string, path: string) => `https://cdn.jsdelivr.net/npm/${pkg}@latest/${path}`
+/** jsDelivr URL for a published asset. The specifier carries its own version and
+ *  is never `@latest`: that alias resolves at request time, so the bytes behind
+ *  a login page can change with no release here, and jsDelivr goes on serving a
+ *  file from a version that no longer ships it — @luxfi/brand@latest answers
+ *  assets/logo/logo.svg with a cached triangle that no explicit version has. */
+const cdn = (spec: string, path: string) => `https://cdn.jsdelivr.net/npm/${spec}/${path}`
 
 // Hanzo — canonical. Identity mirrors `brand.json` (kept in sync by
 // test/brand-json-consistency.test.mjs); mark is the `@hanzo/logo` block-H.
@@ -131,8 +135,8 @@ const HANZO: BrandIdentity = {
     linkedin: 'https://linkedin.com/company/hanzoai',
   },
   mark: BRAND_MARKS.hanzo,
-  logoUrl: cdn('@hanzo/brand', 'assets/logo/logo.svg'),
-  faviconUrl: cdn('@hanzo/brand', 'assets/logo/favicon.svg'),
+  logoUrl: cdn('@hanzo/brand@1.4.7', 'assets/logo/logo.svg'),
+  faviconUrl: cdn('@hanzo/brand@1.4.7', 'assets/logo/favicon.svg'),
 }
 
 // Lux — Lux Industries Inc. (lux.network). Monochrome mark (downward triangle).
@@ -153,8 +157,8 @@ const LUX: BrandIdentity = {
     discord: 'https://discord.gg/lux',
   },
   mark: BRAND_MARKS.lux,
-  logoUrl: cdn('@luxfi/brand', 'assets/logo/logo.svg'),
-  faviconUrl: cdn('@luxfi/brand', 'assets/logo/favicon.svg'),
+  logoUrl: cdn('@luxfi/logo@1.0.8', 'svg/lux-icon-white.svg'),
+  faviconUrl: cdn('@luxfi/logo@1.0.8', 'svg/lux-favicon.svg'),
 }
 
 // Zoo — Zoo Labs Foundation (zoo.ngo). The one full-color mark (CMYK circles).
@@ -178,8 +182,8 @@ const ZOO: BrandIdentity = {
     discord: 'https://discord.gg/zoo',
   },
   mark: BRAND_MARKS.zoo,
-  logoUrl: cdn('@zooai/brand', 'assets/logo/logo.svg'),
-  faviconUrl: cdn('@zooai/brand', 'assets/logo/logo.svg'),
+  logoUrl: cdn('@zooai/brand@1.4.1', 'assets/logo/logo.svg'),
+  faviconUrl: cdn('@zooai/brand@1.4.1', 'assets/logo/logo.svg'),
 }
 
 // Pars — Parsis Foundation (pars.network). Persian 8-pointed star, gold accent.
@@ -202,8 +206,11 @@ const PARS: BrandIdentity = {
     github: 'https://github.com/parsdao',
   },
   mark: BRAND_MARKS.pars,
-  logoUrl: cdn('@parsdao/brand', 'assets/logo/logo.svg'),
-  faviconUrl: cdn('@parsdao/brand', 'assets/logo/logo.svg'),
+  // @parsdao/brand ships no assets/ at any published version, so this resolves
+  // to a 404 until one is published. Pinned regardless: floating it on @latest
+  // hid the gap behind an alias instead of naming it.
+  logoUrl: cdn('@parsdao/brand@1.0.1', 'assets/logo/logo.svg'),
+  faviconUrl: cdn('@parsdao/brand@1.0.1', 'assets/logo/logo.svg'),
 }
 
 // White-label Hanzo-cloud tenants seeded as orgs in the Hanzo IAM. Own
