@@ -26,8 +26,8 @@
     "tiktok": "",
     "github": "https://github.com/hanzoai",
     "discord": "https://discord.gg/CJCyAsm9Vr",
-    "logoUrl": "https://cdn.jsdelivr.net/npm/@hanzo/brand@latest/assets/logo/logo.svg",
-    "faviconUrl": "https://cdn.jsdelivr.net/npm/@hanzo/brand@latest/assets/logo/favicon.png",
+    "logoUrl": "https://cdn.jsdelivr.net/npm/@hanzo/brand@1.4.7/assets/logo/logo.svg",
+    "faviconUrl": "https://cdn.jsdelivr.net/npm/@hanzo/brand@1.4.7/assets/logo/favicon.png",
     "primaryColor": "#FFFFFF",
     "theme": {
       "light": {

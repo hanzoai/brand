@@ -257,3 +257,19 @@ test('HOST_BRANDS covers all four primary brands', () => {
     assert.ok(HOST_BRANDS.some((e) => e.brand === brand), `HOST_BRANDS has a ${brand} suffix`)
   }
 })
+
+// Every asset URL names its own version. `@latest` resolves when the browser
+// asks, so the bytes behind a login page can change with no release here — and
+// jsDelivr keeps serving a file from a version that no longer ships it, which
+// no explicit version reproduces. A pinned specifier is the whole guard.
+test('asset URLs pin a version', () => {
+  for (const b of Object.values(BRANDS)) {
+    for (const url of [b.logoUrl, b.faviconUrl]) {
+      assert.ok(url.startsWith('https://'), `${b.id}: ${url} is not absolute`)
+      assert.ok(!url.includes('@latest'), `${b.id}: ${url} floats on @latest`)
+      const spec = url.slice('https://cdn.jsdelivr.net/npm/'.length)
+      assert.match(spec, /^@[a-z0-9-]+\/[a-z0-9-]+@\d+\.\d+\.\d+\//,
+        `${b.id}: ${url} does not name a version`)
+    }
+  }
+})
