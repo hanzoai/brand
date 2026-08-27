@@ -1,6 +1,6 @@
 {
   "name": "@hanzo/brand",
-  "version": "1.4.7",
+  "version": "1.4.8",
   "packageManager": "pnpm@11.17.0",
   "description": "Official brand assets and design system for Hanzo AI",
   "main": "dist/index.js",
