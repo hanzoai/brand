@@ -7,3 +7,6 @@ allowBuilds:
 minimumReleaseAgeExclude:
   - '@hanzo/*'
   - '@hanzogui/*'
+
+catalog:
+  '@hanzo/logo': 1.0.26
