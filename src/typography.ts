@@ -151,20 +151,16 @@ export const typography = {
 
 /**
  * The stack the SVG card renderers ask for, as a CSS value rather than an array.
- * It lived twice — `cards.ts` and `hero.ts` each declared the same string, both
- * leading with Inter, which is not a face this brand has ever owned.
+ * `cards.ts` and `hero.ts` both read it from here.
  *
  * Zen leads. @hanzo/font ships the woff2, so a rasterizer resolves it by being
  * pointed at that package (resvg-js takes `fontFiles`/`fontDirs`); a host that
- * cannot falls through the tail exactly as it did before, so naming Zen here
- * cannot render worse than the string it replaced.
+ * cannot falls through the tail.
  */
 export const svgFontStack = `Zen,'SF Pro Display','Helvetica Neue',Arial,sans-serif`
 
 // The FACES are @hanzo/font's — it ships Zen, Zen Mono and the five Zen Pixel
 // variants as woff2 with the @font-face rules to match. This package names the
-// family a surface should ask for; it does not declare one, and it used to:
-// `fontFaces` pointed two @font-face rules at /fonts/geist-*-var.woff2, files
-// this package has never shipped, so it could only ever paint the fallback.
+// family a surface should ask for; it does not declare one.
 
 export default typography
