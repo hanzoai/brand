@@ -1,7 +1,7 @@
 {
   "name": "@hanzo/brand",
   "version": "1.4.8",
-  "packageManager": "pnpm@11.17.0",
+  "packageManager": "pnpm@11.24.0",
   "description": "Official brand assets and design system for Hanzo AI",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
@@ -126,6 +126,6 @@
     "registry": "https://registry.npmjs.org/"
   },
   "dependencies": {
-    "@hanzo/logo": "^1.0.11"
+    "@hanzo/logo": "catalog:"
   }
 }
