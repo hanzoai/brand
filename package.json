@@ -106,15 +106,15 @@
   },
   "homepage": "https://github.com/hanzoai/brand",
   "devDependencies": {
-    "@types/node": "^20.0.0",
-    "@types/react": "^19.0.0",
-    "eslint": "^8.0.0",
-    "react": "^19.0.0",
-    "tsup": "^8.5.1",
-    "typescript": "^5.9.3"
+    "@types/node": "catalog:",
+    "@types/react": "catalog:",
+    "eslint": "catalog:",
+    "react": "catalog:",
+    "tsup": "catalog:",
+    "typescript": "catalog:"
   },
   "peerDependencies": {
-    "react": ">=18"
+    "react": ">=19.2.8"
   },
   "peerDependenciesMeta": {
     "react": {
