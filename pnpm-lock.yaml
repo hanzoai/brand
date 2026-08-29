@@ -4,13 +4,19 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+catalogs:
+  default:
+    '@hanzo/logo':
+      specifier: 1.0.26
+      version: 1.0.26
+
 importers:
 
   .:
     dependencies:
       '@hanzo/logo':
-        specifier: ^1.0.11
-        version: 1.0.13(react@19.2.8)
+        specifier: 'catalog:'
+        version: 1.0.26(react@19.2.8)
     devDependencies:
       '@types/node':
         specifier: ^20.0.0
@@ -207,8 +213,8 @@ packages:
     resolution: {integrity: sha512-d9zaMRSTIKDLhctzH12MtXvJKSSUhaHcjV+2Z+GK+EEY7XKpP5yR4x+N3TAcHTcu963nIr+TMcCb4DBCYX1z6Q==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
 
-  '@hanzo/logo@1.0.13':
-    resolution: {integrity: sha512-94VA6S7oVY5UZ816295Ez12p8a76ZGEct14JQwE6r5UCutD3K9TBgx5V01gjwxwVL9tWnXn/yut4PHRAY/9RNQ==}
+  '@hanzo/logo@1.0.26':
+    resolution: {integrity: sha512-acPRsdTD/pfsDLUias989cDZCCg4Q9rCCrlOWVqlAzcN7xyoi3Vl4DjM7Z+feOL5SDPxWY1M0hJn9B1xqGjK4g==}
     peerDependencies:
       react: '>=16.8.0'
     peerDependenciesMeta:
@@ -1032,7 +1038,7 @@ snapshots:
 
   '@eslint/js@8.57.1': {}
 
-  '@hanzo/logo@1.0.13(react@19.2.8)':
+  '@hanzo/logo@1.0.26(react@19.2.8)':
     optionalDependencies:
       react: 19.2.8
 
