@@ -1,6 +1,6 @@
 {
   "name": "@hanzo/brand",
-  "version": "1.4.8",
+  "version": "1.4.9",
   "packageManager": "pnpm@11.24.0",
   "description": "Official brand assets and design system for Hanzo AI",
   "main": "dist/index.js",
@@ -82,7 +82,8 @@
     "brand.json"
   ],
   "scripts": {
-    "build": "tsup src/index.ts src/loader.ts src/hero.ts src/cli.ts src/brand-id.ts src/registry.ts src/marks.ts --format cjs,esm --dts --clean",
+    "gen": "node scripts/gen-variables.mjs",
+    "build": "pnpm gen && tsup src/index.ts src/loader.ts src/hero.ts src/cli.ts src/brand-id.ts src/registry.ts src/marks.ts --format cjs,esm --dts --clean",
     "dev": "tsup src/index.ts src/loader.ts src/hero.ts src/cli.ts src/brand-id.ts src/registry.ts src/marks.ts --format cjs,esm --dts --watch",
     "lint": "eslint src",
     "type-check": "tsc --noEmit",

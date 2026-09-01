@@ -24,6 +24,14 @@ brand.docsDomain;     // 'docs.hanzo.ai'
 The Hanzo palette is **pure monochrome** (black + white, Vercel/Linear style) —
 no color accent. `brand.json` is canonical: names, domains, socials, theme.
 
+**CSS variables come from [`@hanzo/tokens`](https://git.hanzo.ai/hanzoai/ui).**
+`styles/variables.css` is NOT hand-authored — it is that package's generated
+bundle, re-emitted by `scripts/gen-variables.mjs` (plus a thin compatibility block
+for legacy names the Go dashboards still reference). To change a value, edit
+`@hanzo/tokens` `src/theme.ts`, run `pnpm --filter @hanzo/tokens gen-css`, then
+`pnpm gen` here. Go surfaces (`ci`/`cd`/`git` dashboards) vendor this sheet, so
+the whole estate shares one palette.
+
 ## Social-card toolkit
 
 One layout engine, **any brand**. Zero-dependency SVG — no browser/canvas. Same
