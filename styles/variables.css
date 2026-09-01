@@ -55,11 +55,11 @@
 
   /* ——— semantic aliases (dark, the default) ——— */
   --background:#0a0a0a;
-  --foreground:#fafafa;
+  --foreground:#e5e5e5; /* the graded ink, one rung short of #fafafa */
   --card:#0f0f0f;
-  --card-foreground:#fafafa;
+  --card-foreground:#e5e5e5;
   --popover:#0f0f0f;
-  --popover-foreground:#fafafa;
+  --popover-foreground:#e5e5e5;
   --primary:#fafafa;
   --primary-hover:#e5e5e5;
   --primary-foreground:#0a0a0a;
