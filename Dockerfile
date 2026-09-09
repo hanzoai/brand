@@ -5,5 +5,5 @@
 # index.html is the whole site: one self-contained page, inline CSS, no scripts
 # and no local subresources. There is nothing to build, so there is no build
 # stage — a compile step here would exist only to look like the others.
-FROM ghcr.io/hanzoai/static:v0.5.1
+FROM ghcr.io/hanzoai/static:0.5.15
 COPY index.html /public/index.html
