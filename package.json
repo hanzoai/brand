@@ -86,7 +86,7 @@
     "build": "pnpm gen && tsup src/index.ts src/loader.ts src/hero.ts src/cli.ts src/brand-id.ts src/registry.ts src/marks.ts --format cjs,esm --dts --clean",
     "dev": "tsup src/index.ts src/loader.ts src/hero.ts src/cli.ts src/brand-id.ts src/registry.ts src/marks.ts --format cjs,esm --dts --watch",
     "lint": "eslint src",
-    "type-check": "tsc --noEmit",
+    "type-check": "node_modules/tsgo/bin/tsc --noEmit --incremental false",
     "test": "pnpm build && node --test test/*.test.mjs"
   },
   "keywords": [
@@ -111,6 +111,7 @@
     "@types/react": "catalog:",
     "eslint": "catalog:",
     "react": "catalog:",
+    "tsgo": "npm:typescript@7.0.2",
     "tsup": "catalog:",
     "typescript": "catalog:"
   },
