@@ -1,9 +1,8 @@
 # Canonical CI/CD config for hanzoai/brand — the one file both the hanzoai/ci
 # reusable (.hanzo/workflows/cicd.yml) and platform.hanzo.ai read.
 #
-# GATE ONLY: @hanzo/brand is an npm package, and the static brand site it also
-# carries already has its own lanes here (.hanzo/workflows/publish.yml,
-# deploy.yml). Declaring `images:` would build the same Dockerfile twice.
+# @hanzo/brand is an npm package; the static brand site it also carries is the
+# image declared at the end of this file, built by the build door.
 #
 # The gate is the package's own: type-check, then `pnpm test`, which builds all
 # seven tsup entries and then runs the node:test suites against the result. The
@@ -18,3 +17,11 @@ test:
       pnpm install --frozen-lockfile
       pnpm type-check
       pnpm test
+
+# Built by the build door, one BuildKit Job per platform.
+images:
+  - name: brand
+    context: .
+    dockerfile: Dockerfile
+    repo: ghcr.io/hanzoai/brand
+    platforms: [linux/amd64]
