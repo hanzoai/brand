@@ -10,6 +10,7 @@ minimumReleaseAgeExclude:
 
 catalog:
   '@hanzo/logo': '1.0.26'
+  '@hanzo/tokens': '1.1.1'
   '@types/node': '26.4.0'
   '@types/react': '19.2.18'
   'eslint': '^10.9.1'

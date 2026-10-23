@@ -85,6 +85,21 @@ renderMarkSVG('pars')        // framework-agnostic inline SVG string
 toBrandContract(BRANDS.zoo)  // -> the @hanzo/id runtime BrandContract shape
 ```
 
+## What a wordmark reads: `title`
+`title(id)` (`@hanzo/brand/registry`, also the root) is the one answer to "what
+does this host's wordmark say": a brand's `title` ("Hanzo AI", "Lux Network",
+"Zoo"), or a Hanzo product's that carries a name of its own (`PRODUCTS`:
+`team` → "Hanzo Team", hanzo.team). `@hanzo/app`'s `app({ brand })` reads it.
+A product names the brand it belongs to and never repeats a brand's title; an
+id that names neither throws, so a host's typo never prints another brand.
+
+## Release
+`.github/workflows/publish.yml` publishes when `package.json` is ahead of npm,
+with `NPM_TOKEN` read from KMS through `KMS_CLIENT_ID`/`KMS_CLIENT_SECRET`. The
+gate is the release: `pnpm install --frozen-lockfile`, `pnpm type-check`,
+`pnpm test` (which builds and regenerates `styles/variables.css` from
+`@hanzo/tokens`, a dev dependency). No laptop publishes.
+
 ## Structure
 ```
 src/

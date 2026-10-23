@@ -10,7 +10,7 @@
  *   or:   <link rel="stylesheet" href="https://unpkg.com/@hanzo/brand/styles/variables.css">
  */
 
-/* Hanzo design tokens — colour + radius + type + spacing. The full bundle. */
+/* Hanzo design tokens — colour + radius + type + spacing + data. The full bundle. */
 
 :root{
   color-scheme:dark;
@@ -31,6 +31,15 @@
   --pure-white:#FFFFFF;
   --hanzo-black:#0A0A0B;
   --hanzo-white:#FFFFFF;
+
+  /* ——— art: four hues, for artwork only ———
+     Light, never paint. They colour hero art and the few soft glows that give a
+     section form; chrome, type and every control stay on the monochrome ladder
+     below. The same in both themes, because art is not themed. */
+  --art-tide:#2F6BFF;
+  --art-iris:#8B5CF6;
+  --art-ember:#FF7A3D;
+  --art-glow:#F4F1FF;
 
   /* ——— the opacity ladder: the real palette ——— */
   --white-03:rgb(255 255 255 / .03); /* the raised fill */
@@ -69,9 +78,10 @@
   --muted:#171717;
   --muted-foreground:#a3a3a3;
   --accent:#262626;
+  --accent-hover:var(--secondary-hover); /* the accent under the cursor; a chosen accent restates it */
   --accent-foreground:#fafafa;
-  --destructive:var(--state-error);
-  --destructive-hover:#dc2626; /* red-600 — deepens under the cursor */
+  --destructive:#dc2626; /* red-600 — a FILL under its foreground, 4.6:1; the error hue is --state-error */
+  --destructive-hover:#b91c1c; /* red-700 — deepens under the cursor, 6.2:1 */
   --destructive-foreground:#fafafa;
 
   /* ——— boundaries — ONE ladder, cut from alpha, graded by duty ——— */
@@ -80,6 +90,7 @@
   --border-control:var(--white-15); /* a control's resting edge */
   --border-focus:var(--white-22); /* that control, focused */
   --border-selected:var(--white-30); /* the thing currently CHOSEN */
+  --edge:var(--white-06); /* fainter than the hairline: an edge between chrome and page */
   --input:var(--border-control); /* shadcn `border-input` — a control */
   --ring:var(--white-40); /* the focus indicator — 3:1 non-text contrast */
   --ring-halo:var(--white-10); /* the soft halo outside the ring */
@@ -115,6 +126,7 @@
   --text-tertiary:var(--white-55);
   --text-helper:var(--muted-foreground);
   --text-disabled:var(--white-30);
+  --text-faint:var(--white-22); /* an empty cell, a grip, a resting light icon: present, never read */
 
   /* ——— the ONLY permitted hues (DESIGN.md §2.4) ——— */
   --state-error:#ef4444; /* red-500 — destructive / blocking error */
@@ -122,6 +134,9 @@
   --state-error-bg:rgb(239 68 68 / .1);
   --state-online:#4ade80; /* green-400 — live status dot */
   --state-success:#22c55e; /* green-500 — "Free" / "Save N%" callouts */
+  --state-success-bg:rgb(34 197 94 / .1);
+  --state-warning:#f59e0b; /* amber-500 — needs attention, not blocking */
+  --state-warning-bg:rgb(245 158 11 / .1);
   --chrome-dot-red:rgb(239 68 68 / .6);
   --chrome-dot-yellow:rgb(234 179 8 / .6);
   --chrome-dot-green:rgb(34 197 94 / .6);
@@ -135,22 +150,25 @@
   --radius-2xl:1.5rem; /* rounded-3xl — story / hero cards */
   --radius-composer:28px; /* the chat composer, exactly 28px */
   --radius-full:9999px; /* pills, CTAs, avatars, badges */
+  --radius-xs:calc(0.25rem * var(--radius-scale, 1)); /* 4px — chips, tags, menu rows, cells: a row nested in an 8px panel */
+  --radius-2xs:calc(0.125rem * var(--radius-scale, 1)); /* 2px — a check mark, a square avatar, a flag */
 
-  --font-sans:Zen, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  --font-mono:Zen Mono, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
-  --font-sans:Zen, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; /* 11px — eyebrows / section labels */
-  --font-sans:Zen, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; /* 13px — nav labels, dense body */
-  --font-sans:Zen, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; /* 14px — base app text */
-  --font-sans:Zen, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; /* 15px */
-  --font-sans:Zen, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; /* 17px */
-  --font-sans:Zen, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; /* 21px */
-  --font-sans:Zen, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; /* 26px */
-  --font-sans:Zen, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; /* 32px */
-  --font-sans:Zen, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; /* 40px */
-  --font-sans:Zen, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; /* 52px */
-  --font-sans:Zen, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; /* 64px */
-  --font-sans:Zen, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; /* 84px */
-  --font-sans:Zen, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; /* 112px */
+  /* ——— type — Zen + Zen Mono, self-hosted ——— */
+  --font-sans:'Zen', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-mono:'Zen Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+  --font-size-xs:0.75rem; /* 12px — eyebrows, section labels, chips, a menu row's second line (design 0.5.35) */
+  --font-size-sm:0.8125rem; /* 13px — nav labels, dense body */
+  --font-size-base:0.875rem; /* 14px — base app text */
+  --font-size-lg:0.9375rem; /* 15px */
+  --font-size-xl:1.0625rem; /* 17px */
+  --font-size-2xl:1.3125rem; /* 21px */
+  --font-size-3xl:1.625rem; /* 26px */
+  --font-size-4xl:2rem; /* 32px */
+  --font-size-5xl:2.5rem; /* 40px */
+  --font-size-6xl:3.25rem; /* 52px */
+  --font-size-7xl:4rem; /* 64px */
+  --font-size-8xl:5.25rem; /* 84px */
+  --font-size-9xl:7rem; /* 112px */
 
   /* ——— spacing — the 4px ramp ——— */
   --space-1:0.25rem;
@@ -165,6 +183,441 @@
   --space-16:4rem;
   --space-20:5rem;
   --space-24:6rem;
+
+  /* ——— icons, blur, loops and keycaps ———
+     Icons are Lucide at stroke 2: 16 in menus, tabs and labels, 14 in buttons and
+     tags, 20 to 24 in empty states. The blurs are radii for an optional glass
+     panel (floating surfaces are near-opaque by default). The loop is for a
+     shimmer or a sweep only; --duration-slow stays the 400ms entry. */
+  --icon-size-sm:14px;
+  --icon-size-md:16px;
+  --icon-size-lg:20px;
+  --icon-size-xl:24px;
+  --blur-sm:blur(6px);
+  --blur-md:blur(12px);
+  --blur-lg:blur(20px);
+  --duration-loop:1500ms;
+  --shadow-underline:0 1px 0 0 var(--border-strong); /* a keycap sits on its own lower edge */
+
+  /* ——— data: red ——— */
+  --data-red-1:#191111;
+  --data-red-2:#201314;
+  --data-red-3:#3b1219;
+  --data-red-4:#500e1c;
+  --data-red-5:#611623;
+  --data-red-6:#73232d;
+  --data-red-7:#8c333a;
+  --data-red-8:#b54548;
+  --data-red-9:#e5484d;
+  --data-red-10:#ec5e5e;
+  --data-red-11:#ff8a88;
+  --data-red-12:#ffd1d9;
+
+  /* ——— data: ruby ——— */
+  --data-ruby-1:#191113;
+  --data-ruby-2:#1e1517;
+  --data-ruby-3:#3a141e;
+  --data-ruby-4:#4e1325;
+  --data-ruby-5:#5e1a2e;
+  --data-ruby-6:#6f2539;
+  --data-ruby-7:#883447;
+  --data-ruby-8:#b3445a;
+  --data-ruby-9:#e54666;
+  --data-ruby-10:#ec5a72;
+  --data-ruby-11:#ff8a94;
+  --data-ruby-12:#fed2e1;
+
+  /* ——— data: crimson ——— */
+  --data-crimson-1:#191114;
+  --data-crimson-2:#201318;
+  --data-crimson-3:#381525;
+  --data-crimson-4:#4d122f;
+  --data-crimson-5:#5c1839;
+  --data-crimson-6:#6d2445;
+  --data-crimson-7:#873357;
+  --data-crimson-8:#b0436e;
+  --data-crimson-9:#e93d82;
+  --data-crimson-10:#ee528a;
+  --data-crimson-11:#ff87a8;
+  --data-crimson-12:#fdd3e8;
+
+  /* ——— data: tomato ——— */
+  --data-tomato-1:#181111;
+  --data-tomato-2:#1f1513;
+  --data-tomato-3:#391714;
+  --data-tomato-4:#4e1511;
+  --data-tomato-5:#5e1c16;
+  --data-tomato-6:#6e2920;
+  --data-tomato-7:#863a2d;
+  --data-tomato-8:#ac4d39;
+  --data-tomato-9:#e54d2e;
+  --data-tomato-10:#ec6142;
+  --data-tomato-11:#ff8e6c;
+  --data-tomato-12:#fbd3cb;
+
+  /* ——— data: orange ——— */
+  --data-orange-1:#17120e;
+  --data-orange-2:#1e160f;
+  --data-orange-3:#331e0b;
+  --data-orange-4:#481f00;
+  --data-orange-5:#562800;
+  --data-orange-6:#66350c;
+  --data-orange-7:#7e451d;
+  --data-orange-8:#a35829;
+  --data-orange-9:#f76a15;
+  --data-orange-10:#ff791b;
+  --data-orange-11:#ff9b52;
+  --data-orange-12:#ffe0c2;
+
+  /* ——— data: amber ——— */
+  --data-amber-1:#16120c;
+  --data-amber-2:#1d180f;
+  --data-amber-3:#302008;
+  --data-amber-4:#412700;
+  --data-amber-5:#4e3000;
+  --data-amber-6:#5c3d05;
+  --data-amber-7:#714f1a;
+  --data-amber-8:#8f6424;
+  --data-amber-9:#ffc100;
+  --data-amber-10:#ffdc00;
+  --data-amber-11:#ffc916;
+  --data-amber-12:#ffe7b3;
+
+  /* ——— data: yellow ——— */
+  --data-yellow-1:#14110b;
+  --data-yellow-2:#1b180f;
+  --data-yellow-3:#2c2305;
+  --data-yellow-4:#372b00;
+  --data-yellow-5:#433500;
+  --data-yellow-6:#524202;
+  --data-yellow-7:#665417;
+  --data-yellow-8:#836a20;
+  --data-yellow-9:#ffea00;
+  --data-yellow-10:#ffff57;
+  --data-yellow-11:#f5e147;
+  --data-yellow-12:#f6eeb4;
+
+  /* ——— data: lime ——— */
+  --data-lime-1:#11130c;
+  --data-lime-2:#151a10;
+  --data-lime-3:#1f2917;
+  --data-lime-4:#29371d;
+  --data-lime-5:#334423;
+  --data-lime-6:#3d522a;
+  --data-lime-7:#496231;
+  --data-lime-8:#577538;
+  --data-lime-9:#bdee63;
+  --data-lime-10:#d4ff70;
+  --data-lime-11:#bde56b;
+  --data-lime-12:#e3f7ba;
+
+  /* ——— data: grass ——— */
+  --data-grass-1:#0e1511;
+  --data-grass-2:#141a15;
+  --data-grass-3:#1b2a1e;
+  --data-grass-4:#1d3a24;
+  --data-grass-5:#25482d;
+  --data-grass-6:#2d5736;
+  --data-grass-7:#366740;
+  --data-grass-8:#3e7949;
+  --data-grass-9:#46a758;
+  --data-grass-10:#53b365;
+  --data-grass-11:#71d083;
+  --data-grass-12:#c2f0c2;
+
+  /* ——— data: green ——— */
+  --data-green-1:#0e1512;
+  --data-green-2:#121b17;
+  --data-green-3:#132d21;
+  --data-green-4:#113b29;
+  --data-green-5:#174933;
+  --data-green-6:#1f573e;
+  --data-green-7:#28684a;
+  --data-green-8:#2f7c57;
+  --data-green-9:#30a46c;
+  --data-green-10:#33b074;
+  --data-green-11:#3dd68c;
+  --data-green-12:#b1f1cb;
+
+  /* ——— data: jade ——— */
+  --data-jade-1:#0d1512;
+  --data-jade-2:#121c18;
+  --data-jade-3:#0f2e23;
+  --data-jade-4:#0a3b2c;
+  --data-jade-5:#104837;
+  --data-jade-6:#1b5645;
+  --data-jade-7:#246854;
+  --data-jade-8:#2a7e68;
+  --data-jade-9:#29a383;
+  --data-jade-10:#27b08b;
+  --data-jade-11:#1ed8a4;
+  --data-jade-12:#adf0d4;
+
+  /* ——— data: mint ——— */
+  --data-mint-1:#0d1515;
+  --data-mint-2:#0f1b1b;
+  --data-mint-3:#092c2b;
+  --data-mint-4:#003a39;
+  --data-mint-5:#004744;
+  --data-mint-6:#0f5650;
+  --data-mint-7:#1e685f;
+  --data-mint-8:#277f70;
+  --data-mint-9:#86ead4;
+  --data-mint-10:#a8f5e5;
+  --data-mint-11:#58d5ba;
+  --data-mint-12:#c4f5e1;
+
+  /* ——— data: teal ——— */
+  --data-teal-1:#0d1514;
+  --data-teal-2:#111c1b;
+  --data-teal-3:#0d2d2a;
+  --data-teal-4:#023b37;
+  --data-teal-5:#084843;
+  --data-teal-6:#145750;
+  --data-teal-7:#1c6961;
+  --data-teal-8:#1f7f74;
+  --data-teal-9:#12a594;
+  --data-teal-10:#0db39e;
+  --data-teal-11:#0ad8b6;
+  --data-teal-12:#adf0dd;
+
+  /* ——— data: cyan ——— */
+  --data-cyan-1:#0b1619;
+  --data-cyan-2:#101b20;
+  --data-cyan-3:#082c36;
+  --data-cyan-4:#003848;
+  --data-cyan-5:#004558;
+  --data-cyan-6:#045468;
+  --data-cyan-7:#12677e;
+  --data-cyan-8:#11809c;
+  --data-cyan-9:#01a2c7;
+  --data-cyan-10:#23afd0;
+  --data-cyan-11:#4ccce5;
+  --data-cyan-12:#b6ecf7;
+
+  /* ——— data: sky ——— */
+  --data-sky-1:#0d141e;
+  --data-sky-2:#111a27;
+  --data-sky-3:#112840;
+  --data-sky-4:#113655;
+  --data-sky-5:#154467;
+  --data-sky-6:#1b537b;
+  --data-sky-7:#1f6692;
+  --data-sky-8:#197cae;
+  --data-sky-9:#7ce2fe;
+  --data-sky-10:#a8eeff;
+  --data-sky-11:#75c7f0;
+  --data-sky-12:#c2f3ff;
+
+  /* ——— data: blue ——— */
+  --data-blue-1:#11131f;
+  --data-blue-2:#141726;
+  --data-blue-3:#182449;
+  --data-blue-4:#1d2e61;
+  --data-blue-5:#253974;
+  --data-blue-6:#304384;
+  --data-blue-7:#3a4f97;
+  --data-blue-8:#435db2;
+  --data-blue-9:#3e63dd;
+  --data-blue-10:#5472e4;
+  --data-blue-11:#9db1ff;
+  --data-blue-12:#d6e1ff;
+
+  /* ——— data: iris ——— */
+  --data-iris-1:#13131e;
+  --data-iris-2:#171625;
+  --data-iris-3:#202248;
+  --data-iris-4:#262a65;
+  --data-iris-5:#303374;
+  --data-iris-6:#3d3d82;
+  --data-iris-7:#4a4a95;
+  --data-iris-8:#5a58b1;
+  --data-iris-9:#5b5bd6;
+  --data-iris-10:#6e6ade;
+  --data-iris-11:#b0a9ff;
+  --data-iris-12:#e0dffe;
+
+  /* ——— data: violet ——— */
+  --data-violet-1:#14121f;
+  --data-violet-2:#1b1525;
+  --data-violet-3:#291f44;
+  --data-violet-4:#33255b;
+  --data-violet-5:#3c2e69;
+  --data-violet-6:#473876;
+  --data-violet-7:#56468b;
+  --data-violet-8:#6858ad;
+  --data-violet-9:#6e56cf;
+  --data-violet-10:#7d66d9;
+  --data-violet-11:#bba5ff;
+  --data-violet-12:#e2ddfe;
+
+  /* ——— data: purple ——— */
+  --data-purple-1:#18111b;
+  --data-purple-2:#1e1523;
+  --data-purple-3:#2f1c3b;
+  --data-purple-4:#3d224e;
+  --data-purple-5:#48295c;
+  --data-purple-6:#54346b;
+  --data-purple-7:#664282;
+  --data-purple-8:#8357aa;
+  --data-purple-9:#8e4ec6;
+  --data-purple-10:#9a5cd0;
+  --data-purple-11:#d59cff;
+  --data-purple-12:#ecd9fa;
+
+  /* ——— data: plum ——— */
+  --data-plum-1:#181118;
+  --data-plum-2:#201320;
+  --data-plum-3:#351935;
+  --data-plum-4:#451d47;
+  --data-plum-5:#502454;
+  --data-plum-6:#5e3062;
+  --data-plum-7:#734079;
+  --data-plum-8:#92549c;
+  --data-plum-9:#ab4aba;
+  --data-plum-10:#b658c4;
+  --data-plum-11:#e796f3;
+  --data-plum-12:#f4d4f4;
+
+  /* ——— data: pink ——— */
+  --data-pink-1:#191117;
+  --data-pink-2:#21121d;
+  --data-pink-3:#37172f;
+  --data-pink-4:#4b143d;
+  --data-pink-5:#591c47;
+  --data-pink-6:#692955;
+  --data-pink-7:#833869;
+  --data-pink-8:#a84885;
+  --data-pink-9:#d6409f;
+  --data-pink-10:#de51a8;
+  --data-pink-11:#ff80ca;
+  --data-pink-12:#fdd1ea;
+
+  /* ——— data: bronze ——— */
+  --data-bronze-1:#141110;
+  --data-bronze-2:#1c1918;
+  --data-bronze-3:#262120;
+  --data-bronze-4:#302a27;
+  --data-bronze-5:#3b3330;
+  --data-bronze-6:#493e3a;
+  --data-bronze-7:#5a4d47;
+  --data-bronze-8:#6f5f57;
+  --data-bronze-9:#a18072;
+  --data-bronze-10:#ae8d7e;
+  --data-bronze-11:#d4b3a5;
+  --data-bronze-12:#ede0d9;
+
+  /* ——— data: gold ——— */
+  --data-gold-1:#121211;
+  --data-gold-2:#1b1a17;
+  --data-gold-3:#24231f;
+  --data-gold-4:#2e2b26;
+  --data-gold-5:#38352f;
+  --data-gold-6:#444039;
+  --data-gold-7:#544f46;
+  --data-gold-8:#696256;
+  --data-gold-9:#978365;
+  --data-gold-10:#a39073;
+  --data-gold-11:#cbb99f;
+  --data-gold-12:#e8e2d9;
+
+  /* ——— data: brown ——— */
+  --data-brown-1:#12110f;
+  --data-brown-2:#1c1816;
+  --data-brown-3:#28211d;
+  --data-brown-4:#322922;
+  --data-brown-5:#3e3128;
+  --data-brown-6:#4d3c2f;
+  --data-brown-7:#614a39;
+  --data-brown-8:#7c5f46;
+  --data-brown-9:#ad7f58;
+  --data-brown-10:#b98c67;
+  --data-brown-11:#dbb594;
+  --data-brown-12:#f2e1ca;
+
+  /* ——— data: gray ——— */
+  --data-gray-1:#171717;
+  --data-gray-2:#1b1b1b;
+  --data-gray-3:#191919;
+  --data-gray-4:#1d1d1d;
+  --data-gray-5:#222222;
+  --data-gray-6:#484848;
+  --data-gray-7:#4c4c4c;
+  --data-gray-8:#666666;
+  --data-gray-9:#818181;
+  --data-gray-10:#7b7b7b;
+  --data-gray-11:#b3b3b3;
+  --data-gray-12:#ebebeb;
+
+  /* ——— data: mauve ——— */
+  --data-mauve-1:#121113;
+  --data-mauve-2:#1a191b;
+  --data-mauve-3:#232225;
+  --data-mauve-4:#2b292d;
+  --data-mauve-5:#323035;
+  --data-mauve-6:#3c393f;
+  --data-mauve-7:#49474e;
+  --data-mauve-8:#625f69;
+  --data-mauve-9:#6f6d78;
+  --data-mauve-10:#7d7a85;
+  --data-mauve-11:#b5b2bc;
+  --data-mauve-12:#eeeef0;
+
+  /* ——— data: olive ——— */
+  --data-olive-1:#111210;
+  --data-olive-2:#181917;
+  --data-olive-3:#212220;
+  --data-olive-4:#282a27;
+  --data-olive-5:#2f312e;
+  --data-olive-6:#383a37;
+  --data-olive-7:#454943;
+  --data-olive-8:#5c625b;
+  --data-olive-9:#687066;
+  --data-olive-10:#767d74;
+  --data-olive-11:#afb5ad;
+  --data-olive-12:#eceeec;
+
+  /* ——— data: sage ——— */
+  --data-sage-1:#101211;
+  --data-sage-2:#171918;
+  --data-sage-3:#202221;
+  --data-sage-4:#272a28;
+  --data-sage-5:#2e3130;
+  --data-sage-6:#373b39;
+  --data-sage-7:#444947;
+  --data-sage-8:#5b625f;
+  --data-sage-9:#63706b;
+  --data-sage-10:#717d79;
+  --data-sage-11:#adb5b2;
+  --data-sage-12:#eceeed;
+
+  /* ——— data: sand ——— */
+  --data-sand-1:#111110;
+  --data-sand-2:#191918;
+  --data-sand-3:#222221;
+  --data-sand-4:#2a2a28;
+  --data-sand-5:#31312e;
+  --data-sand-6:#3b3a37;
+  --data-sand-7:#494844;
+  --data-sand-8:#62605a;
+  --data-sand-9:#6f6d66;
+  --data-sand-10:#7d7b74;
+  --data-sand-11:#b5b3ad;
+  --data-sand-12:#eeeeec;
+
+  /* ——— data: slate ——— */
+  --data-slate-1:#111113;
+  --data-slate-2:#18191b;
+  --data-slate-3:#212225;
+  --data-slate-4:#272a2d;
+  --data-slate-5:#2e3135;
+  --data-slate-6:#363a3f;
+  --data-slate-7:#43484e;
+  --data-slate-8:#5a6169;
+  --data-slate-9:#696e77;
+  --data-slate-10:#777b84;
+  --data-slate-11:#b0b4ba;
+  --data-slate-12:#edeef0;
 }
 
 .light{
@@ -186,9 +639,10 @@
   --muted:#ededed;
   --muted-foreground:#525252;
   --accent:#e4e4e4;
+  --accent-hover:var(--secondary-hover);
   --accent-foreground:#0a0a0a;
-  --destructive:var(--state-error);
-  --destructive-hover:#dc2626;
+  --destructive:#dc2626;
+  --destructive-hover:#b91c1c;
   --destructive-foreground:#ffffff;
 
   /* ——— boundaries — restated as black-alpha ——— */
@@ -197,6 +651,7 @@
   --border-control:rgb(0 0 0 / .15);
   --border-focus:rgb(0 0 0 / .32); /* pushed past .22: black-on-white reads fainter */
   --border-selected:rgb(0 0 0 / .42);
+  --edge:rgb(0 0 0 / .06);
   --input:var(--border-control);
   --ring:rgb(0 0 0 / .5); /* 3.98:1 on #ffffff, 3.67:1 on #f5f5f5 */
   --ring-halo:rgb(0 0 0 / .07);
@@ -219,6 +674,427 @@
   --text-secondary:rgb(10 10 10 / .78);
   --text-tertiary:rgb(10 10 10 / .55);
   --text-disabled:rgb(10 10 10 / .3);
+  --text-faint:rgb(10 10 10 / .2);
+
+  /* ——— data: red ——— */
+  --data-red-1:#fffcfc;
+  --data-red-2:#fff7f7;
+  --data-red-3:#feebec;
+  --data-red-4:#ffdbdc;
+  --data-red-5:#ffcdce;
+  --data-red-6:#fdbdbe;
+  --data-red-7:#f4a9aa;
+  --data-red-8:#eb8e90;
+  --data-red-9:#e5484d;
+  --data-red-10:#dd3e42;
+  --data-red-11:#ce2c31;
+  --data-red-12:#641723;
+
+  /* ——— data: ruby ——— */
+  --data-ruby-1:#fffcfd;
+  --data-ruby-2:#fff7f8;
+  --data-ruby-3:#feeaed;
+  --data-ruby-4:#ffdce1;
+  --data-ruby-5:#fecfd6;
+  --data-ruby-6:#f8bfc8;
+  --data-ruby-7:#efacb8;
+  --data-ruby-8:#e592a3;
+  --data-ruby-9:#e54666;
+  --data-ruby-10:#dc3b5d;
+  --data-ruby-11:#ca244d;
+  --data-ruby-12:#64172b;
+
+  /* ——— data: crimson ——— */
+  --data-crimson-1:#fffcfd;
+  --data-crimson-2:#fef7f9;
+  --data-crimson-3:#ffe9f0;
+  --data-crimson-4:#fedce7;
+  --data-crimson-5:#facedd;
+  --data-crimson-6:#f3bed1;
+  --data-crimson-7:#eaacc3;
+  --data-crimson-8:#e094b2;
+  --data-crimson-9:#e93d82;
+  --data-crimson-10:#df3478;
+  --data-crimson-11:#cb1d63;
+  --data-crimson-12:#621639;
+
+  /* ——— data: tomato ——— */
+  --data-tomato-1:#fffcfc;
+  --data-tomato-2:#fff8f7;
+  --data-tomato-3:#ffebe7;
+  --data-tomato-4:#ffdcd3;
+  --data-tomato-5:#ffcdc2;
+  --data-tomato-6:#fdbdaf;
+  --data-tomato-7:#f5a898;
+  --data-tomato-8:#ec8e7b;
+  --data-tomato-9:#e54d2e;
+  --data-tomato-10:#dd4425;
+  --data-tomato-11:#d13415;
+  --data-tomato-12:#5c271f;
+
+  /* ——— data: orange ——— */
+  --data-orange-1:#fefcfb;
+  --data-orange-2:#fff7ed;
+  --data-orange-3:#ffefd6;
+  --data-orange-4:#ffdda9;
+  --data-orange-5:#ffcf8b;
+  --data-orange-6:#ffc182;
+  --data-orange-7:#f5ae73;
+  --data-orange-8:#ec9455;
+  --data-orange-9:#f76a15;
+  --data-orange-10:#ef5f00;
+  --data-orange-11:#d14e00;
+  --data-orange-12:#582d1d;
+
+  /* ——— data: amber ——— */
+  --data-amber-1:#fefdfb;
+  --data-amber-2:#fefbe9;
+  --data-amber-3:#fff7c2;
+  --data-amber-4:#ffee9c;
+  --data-amber-5:#fbe577;
+  --data-amber-6:#f4d673;
+  --data-amber-7:#e9c163;
+  --data-amber-8:#e2a336;
+  --data-amber-9:#ffc100;
+  --data-amber-10:#ffba18;
+  --data-amber-11:#ad6200;
+  --data-amber-12:#4f3422;
+
+  /* ——— data: yellow ——— */
+  --data-yellow-1:#fdfdf9;
+  --data-yellow-2:#fefce9;
+  --data-yellow-3:#fffab8;
+  --data-yellow-4:#fff394;
+  --data-yellow-5:#ffe770;
+  --data-yellow-6:#f3d768;
+  --data-yellow-7:#e4c767;
+  --data-yellow-8:#d5ae39;
+  --data-yellow-9:#ffea00;
+  --data-yellow-10:#ffdc00;
+  --data-yellow-11:#a06e00;
+  --data-yellow-12:#473b1f;
+
+  /* ——— data: lime ——— */
+  --data-lime-1:#fcfdfa;
+  --data-lime-2:#f8faf3;
+  --data-lime-3:#eef6d6;
+  --data-lime-4:#e2f0bd;
+  --data-lime-5:#d3e7a6;
+  --data-lime-6:#c2da91;
+  --data-lime-7:#abc978;
+  --data-lime-8:#8db554;
+  --data-lime-9:#bdee63;
+  --data-lime-10:#b0e64c;
+  --data-lime-11:#5c7c2f;
+  --data-lime-12:#37401c;
+
+  /* ——— data: grass ——— */
+  --data-grass-1:#fbfefb;
+  --data-grass-2:#f5fbf5;
+  --data-grass-3:#e9f7e9;
+  --data-grass-4:#daf0db;
+  --data-grass-5:#c9e9ca;
+  --data-grass-6:#b2deb5;
+  --data-grass-7:#94ce9a;
+  --data-grass-8:#65ba74;
+  --data-grass-9:#46a758;
+  --data-grass-10:#3e9a4f;
+  --data-grass-11:#2a7e3b;
+  --data-grass-12:#203c25;
+
+  /* ——— data: green ——— */
+  --data-green-1:#fbfefc;
+  --data-green-2:#f4fbf6;
+  --data-green-3:#e6f6eb;
+  --data-green-4:#d6f1df;
+  --data-green-5:#c4e8d1;
+  --data-green-6:#adddc0;
+  --data-green-7:#8eceaa;
+  --data-green-8:#5bb88b;
+  --data-green-9:#30a46c;
+  --data-green-10:#2b9a66;
+  --data-green-11:#00824d;
+  --data-green-12:#193b2d;
+
+  /* ——— data: jade ——— */
+  --data-jade-1:#fbfefd;
+  --data-jade-2:#f4fbf7;
+  --data-jade-3:#e5f7ed;
+  --data-jade-4:#d6f1e3;
+  --data-jade-5:#c3e9d7;
+  --data-jade-6:#acdec9;
+  --data-jade-7:#8bceb6;
+  --data-jade-8:#55ba9f;
+  --data-jade-9:#29a383;
+  --data-jade-10:#26997b;
+  --data-jade-11:#00825c;
+  --data-jade-12:#1d3b31;
+
+  /* ——— data: mint ——— */
+  --data-mint-1:#f9fefd;
+  --data-mint-2:#f2fbf9;
+  --data-mint-3:#ddf9f2;
+  --data-mint-4:#c8f4e9;
+  --data-mint-5:#b3ecde;
+  --data-mint-6:#9ce0d0;
+  --data-mint-7:#7ecfbd;
+  --data-mint-8:#4cbba5;
+  --data-mint-9:#86ead4;
+  --data-mint-10:#7de1cb;
+  --data-mint-11:#037864;
+  --data-mint-12:#16433c;
+
+  /* ——— data: teal ——— */
+  --data-teal-1:#fafefd;
+  --data-teal-2:#f3fbf9;
+  --data-teal-3:#e0f8f3;
+  --data-teal-4:#ccf3ea;
+  --data-teal-5:#b8ebe0;
+  --data-teal-6:#a1ded2;
+  --data-teal-7:#83cdc1;
+  --data-teal-8:#53b9ab;
+  --data-teal-9:#12a594;
+  --data-teal-10:#0d9b8a;
+  --data-teal-11:#00826d;
+  --data-teal-12:#0d3d38;
+
+  /* ——— data: cyan ——— */
+  --data-cyan-1:#fafdfe;
+  --data-cyan-2:#f2fafb;
+  --data-cyan-3:#def7f9;
+  --data-cyan-4:#caf1f6;
+  --data-cyan-5:#b5e9f0;
+  --data-cyan-6:#9ddee7;
+  --data-cyan-7:#7dcedc;
+  --data-cyan-8:#3db9ce;
+  --data-cyan-9:#01a2c7;
+  --data-cyan-10:#0797b9;
+  --data-cyan-11:#007da5;
+  --data-cyan-12:#0d3c48;
+
+  /* ——— data: sky ——— */
+  --data-sky-1:#f9feff;
+  --data-sky-2:#f1fafd;
+  --data-sky-3:#e1f6fd;
+  --data-sky-4:#d1f0fb;
+  --data-sky-5:#bee7f5;
+  --data-sky-6:#a9daed;
+  --data-sky-7:#8dcae3;
+  --data-sky-8:#60b3d7;
+  --data-sky-9:#7ce2fe;
+  --data-sky-10:#74daf8;
+  --data-sky-11:#00749e;
+  --data-sky-12:#1d3e56;
+
+  /* ——— data: blue ——— */
+  --data-blue-1:#fdfdfe;
+  --data-blue-2:#f7f9ff;
+  --data-blue-3:#edf2fe;
+  --data-blue-4:#e0e9ff;
+  --data-blue-5:#d2deff;
+  --data-blue-6:#c1d0ff;
+  --data-blue-7:#abbdf9;
+  --data-blue-8:#8da4ef;
+  --data-blue-9:#3e63dd;
+  --data-blue-10:#3358d4;
+  --data-blue-11:#3a5bc7;
+  --data-blue-12:#1f2d5c;
+
+  /* ——— data: iris ——— */
+  --data-iris-1:#fdfdff;
+  --data-iris-2:#f8f8ff;
+  --data-iris-3:#f0f1fe;
+  --data-iris-4:#e6e7ff;
+  --data-iris-5:#dadcff;
+  --data-iris-6:#cbcdff;
+  --data-iris-7:#b8b9f8;
+  --data-iris-8:#9b9ef0;
+  --data-iris-9:#5b5bd6;
+  --data-iris-10:#5151cd;
+  --data-iris-11:#5753c6;
+  --data-iris-12:#272962;
+
+  /* ——— data: violet ——— */
+  --data-violet-1:#fdfcfe;
+  --data-violet-2:#faf8ff;
+  --data-violet-3:#f4f0fe;
+  --data-violet-4:#ebe5ff;
+  --data-violet-5:#e1d9ff;
+  --data-violet-6:#d4cafe;
+  --data-violet-7:#c2b5f5;
+  --data-violet-8:#aa99ec;
+  --data-violet-9:#6e56cf;
+  --data-violet-10:#654dc4;
+  --data-violet-11:#6550b9;
+  --data-violet-12:#2f265f;
+
+  /* ——— data: purple ——— */
+  --data-purple-1:#fefcfe;
+  --data-purple-2:#fbf7fe;
+  --data-purple-3:#f7edfd;
+  --data-purple-4:#f2e2fc;
+  --data-purple-5:#ead5f9;
+  --data-purple-6:#e0c4f4;
+  --data-purple-7:#d1afec;
+  --data-purple-8:#be93e4;
+  --data-purple-9:#8e4ec6;
+  --data-purple-10:#8347b9;
+  --data-purple-11:#8145b5;
+  --data-purple-12:#402060;
+
+  /* ——— data: plum ——— */
+  --data-plum-1:#fefcff;
+  --data-plum-2:#fdf7fd;
+  --data-plum-3:#fbebfb;
+  --data-plum-4:#f7def8;
+  --data-plum-5:#f1d1f3;
+  --data-plum-6:#e9c2ec;
+  --data-plum-7:#deade3;
+  --data-plum-8:#cf91d8;
+  --data-plum-9:#ab4aba;
+  --data-plum-10:#a144af;
+  --data-plum-11:#953ea3;
+  --data-plum-12:#53195d;
+
+  /* ——— data: pink ——— */
+  --data-pink-1:#fffcfe;
+  --data-pink-2:#fef7fb;
+  --data-pink-3:#fee9f6;
+  --data-pink-4:#fbdcef;
+  --data-pink-5:#f6cee7;
+  --data-pink-6:#efbfdd;
+  --data-pink-7:#e7acd1;
+  --data-pink-8:#dd93c2;
+  --data-pink-9:#d6409f;
+  --data-pink-10:#cf3897;
+  --data-pink-11:#c2298a;
+  --data-pink-12:#651249;
+
+  /* ——— data: bronze ——— */
+  --data-bronze-1:#fdfcfc;
+  --data-bronze-2:#fdf7f5;
+  --data-bronze-3:#f6edea;
+  --data-bronze-4:#efe4df;
+  --data-bronze-5:#e7d9d3;
+  --data-bronze-6:#dfcdc5;
+  --data-bronze-7:#d3bcb3;
+  --data-bronze-8:#c2a499;
+  --data-bronze-9:#a18072;
+  --data-bronze-10:#957468;
+  --data-bronze-11:#7d5e54;
+  --data-bronze-12:#43302b;
+
+  /* ——— data: gold ——— */
+  --data-gold-1:#fdfdfc;
+  --data-gold-2:#faf9f2;
+  --data-gold-3:#f2f0e7;
+  --data-gold-4:#eae6dc;
+  --data-gold-5:#e1dccf;
+  --data-gold-6:#d7d0bf;
+  --data-gold-7:#cbc0aa;
+  --data-gold-8:#b9a88d;
+  --data-gold-9:#978365;
+  --data-gold-10:#8c795e;
+  --data-gold-11:#71624b;
+  --data-gold-12:#3b352b;
+
+  /* ——— data: brown ——— */
+  --data-brown-1:#fefdfc;
+  --data-brown-2:#fcf9f5;
+  --data-brown-3:#f6eee7;
+  --data-brown-4:#f0e4d9;
+  --data-brown-5:#ebdaca;
+  --data-brown-6:#e4cdb8;
+  --data-brown-7:#dcbc9f;
+  --data-brown-8:#cea37e;
+  --data-brown-9:#ad7f58;
+  --data-brown-10:#a07553;
+  --data-brown-11:#815e46;
+  --data-brown-12:#3e332e;
+
+  /* ——— data: gray ——— */
+  --data-gray-1:#ffffff;
+  --data-gray-2:#fcfcfc;
+  --data-gray-3:#f9f9f9;
+  --data-gray-4:#f1f1f1;
+  --data-gray-5:#ebebeb;
+  --data-gray-6:#d6d6d6;
+  --data-gray-7:#cccccc;
+  --data-gray-8:#b3b3b3;
+  --data-gray-9:#999999;
+  --data-gray-10:#838383;
+  --data-gray-11:#666666;
+  --data-gray-12:#333333;
+
+  /* ——— data: mauve ——— */
+  --data-mauve-1:#fdfcfd;
+  --data-mauve-2:#faf9fb;
+  --data-mauve-3:#f2eff3;
+  --data-mauve-4:#eae7ec;
+  --data-mauve-5:#e2dfe6;
+  --data-mauve-6:#dbd8e0;
+  --data-mauve-7:#d0cdd7;
+  --data-mauve-8:#bcbac7;
+  --data-mauve-9:#8e8c99;
+  --data-mauve-10:#83818e;
+  --data-mauve-11:#65636d;
+  --data-mauve-12:#211f26;
+
+  /* ——— data: olive ——— */
+  --data-olive-1:#fcfdfc;
+  --data-olive-2:#f8faf8;
+  --data-olive-3:#eff1ef;
+  --data-olive-4:#e7e9e7;
+  --data-olive-5:#dfe2df;
+  --data-olive-6:#d7dad7;
+  --data-olive-7:#cccfcc;
+  --data-olive-8:#b9bcb8;
+  --data-olive-9:#898e87;
+  --data-olive-10:#7f837d;
+  --data-olive-11:#60655f;
+  --data-olive-12:#1d211c;
+
+  /* ——— data: sage ——— */
+  --data-sage-1:#fbfdfc;
+  --data-sage-2:#f7f9f8;
+  --data-sage-3:#eef1f0;
+  --data-sage-4:#e6e9e8;
+  --data-sage-5:#dfe2e0;
+  --data-sage-6:#d7dad8;
+  --data-sage-7:#cbcfcd;
+  --data-sage-8:#b8bcbb;
+  --data-sage-9:#868e8b;
+  --data-sage-10:#7c8481;
+  --data-sage-11:#5f6563;
+  --data-sage-12:#1a211e;
+
+  /* ——— data: sand ——— */
+  --data-sand-1:#fdfdfc;
+  --data-sand-2:#f9f9f8;
+  --data-sand-3:#f1f0ef;
+  --data-sand-4:#e9e9e6;
+  --data-sand-5:#e2e1de;
+  --data-sand-6:#dad9d6;
+  --data-sand-7:#cfcfca;
+  --data-sand-8:#bcbbb5;
+  --data-sand-9:#8d8d86;
+  --data-sand-10:#82827c;
+  --data-sand-11:#63635e;
+  --data-sand-12:#21201c;
+
+  /* ——— data: slate ——— */
+  --data-slate-1:#fcfcfd;
+  --data-slate-2:#f9f9fb;
+  --data-slate-3:#f0f0f3;
+  --data-slate-4:#e7e8ec;
+  --data-slate-5:#e0e1e6;
+  --data-slate-6:#d9d9e0;
+  --data-slate-7:#cdced6;
+  --data-slate-8:#b9bbc6;
+  --data-slate-9:#8b8d98;
+  --data-slate-10:#80838d;
+  --data-slate-11:#60646c;
+  --data-slate-12:#1c2024;
 }
 
 /* ——— compatibility aliases ———

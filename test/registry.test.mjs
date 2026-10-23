@@ -21,6 +21,8 @@ import {
   renderMarkSVG,
   toBrand,
   DEFAULT_BRAND,
+  PRODUCTS,
+  title,
 } from '../dist/index.mjs'
 
 test('every brand id has a complete identity record', () => {
@@ -272,4 +274,23 @@ test('asset URLs pin a version', () => {
         `${b.id}: ${url} does not name a version`)
     }
   }
+})
+
+// What a host's wordmark reads is stated once: a brand's title, or the name of a
+// Hanzo product that carries one of its own. A product names a brand that
+// exists, a name is never said twice, and a host that names neither is refused
+// rather than shown another brand's name.
+test('title reads a brand or a product, and refuses a name that is neither', () => {
+  assert.equal(title('hanzo'), 'Hanzo AI')
+  assert.equal(title('lux'), 'Lux Network')
+  assert.equal(title('zoo'), 'Zoo')
+  assert.equal(title('team'), 'Hanzo Team')
+  for (const id of BRAND_IDS) assert.equal(title(id), BRANDS[id].title, id)
+  for (const p of Object.values(PRODUCTS)) {
+    assert.ok(BRAND_IDS.includes(p.brand), `${p.id} is a product of a known brand`)
+    assert.ok(!(p.id in BRANDS), `${p.id} is not also a brand id`)
+    assert.ok(!Object.values(BRANDS).some((b) => b.title === p.title), `${p.id}'s name is said once`)
+  }
+  assert.throws(() => title('hanzo.ai'), /no brand or product is named "hanzo\.ai"/)
+  assert.throws(() => title('toString'), /no brand or product/)
 })
