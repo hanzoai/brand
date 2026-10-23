@@ -261,6 +261,43 @@ export const BRANDS: Record<BrandId, BrandIdentity> = {
 }
 
 /**
+ * Hanzo's products that a host carries under the Hanzo brand and that print a
+ * name of their own: hanzo.team's wordmark reads "Hanzo Team", not the brand's
+ * title. Keyed by the id a host states (`@hanzo/app`'s `app({ brand: 'team' })`).
+ * Only a name a brand's `title` does not already say is here, so nothing is said
+ * twice: hanzo.ai is the `hanzo` brand's "Hanzo AI".
+ */
+export type ProductId = 'team'
+
+/** A product a host carries under a brand, by the name its wordmark reads. */
+export interface Product {
+  readonly id: ProductId
+  /** The brand it is a product of: its legal name, mark and theme. */
+  readonly brand: BrandId
+  /** What its wordmark reads. */
+  readonly title: string
+  /** Its host, bare. */
+  readonly domain: string
+}
+
+/** Every product with a name of its own, keyed by id. */
+export const PRODUCTS: Record<ProductId, Product> = {
+  team: { id: 'team', brand: 'hanzo', title: 'Hanzo Team', domain: 'hanzo.team' },
+}
+
+/**
+ * What a host's wordmark reads, by the id the host states: a brand's title
+ * ("Hanzo AI", "Lux Network", "Zoo"), or a product's ("Hanzo Team"). An id that
+ * names neither throws, naming it — a host's configuration is a boundary, and a
+ * typo there must not print some other brand's name.
+ */
+export function title(id: BrandId | ProductId): string {
+  if (Object.prototype.hasOwnProperty.call(PRODUCTS, id)) return PRODUCTS[id as ProductId].title
+  if (Object.prototype.hasOwnProperty.call(BRANDS, id)) return BRANDS[id as BrandId].title
+  throw new TypeError(`@hanzo/brand: no brand or product is named "${String(id)}"`)
+}
+
+/**
  * Resolve the active brand identity from a hostname. With an explicit `host`
  * (server routes pass the request Host header) it matches via `brandFromHost`;
  * with no argument it reads `window.location.hostname` in the browser and falls

@@ -1,6 +1,6 @@
 {
   "name": "@hanzo/brand",
-  "version": "1.4.10",
+  "version": "1.5.0",
   "packageManager": "pnpm@11.24.0",
   "description": "Official brand assets and design system for Hanzo AI",
   "main": "dist/index.js",
@@ -107,6 +107,7 @@
   },
   "homepage": "https://github.com/hanzoai/brand",
   "devDependencies": {
+    "@hanzo/tokens": "catalog:",
     "@types/node": "catalog:",
     "@types/react": "catalog:",
     "eslint": "catalog:",
