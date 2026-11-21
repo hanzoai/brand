@@ -4,6 +4,8 @@
 
 # @hanzo/brand
 
+[![Open in Hanzo](https://hanzo.app/badges/open-in-hanzo.svg)](https://hanzo.app/dev/open?repo=github.com/hanzoai/brand&ref=main&action=open) [![Edit with Hanzo](https://hanzo.app/badges/edit-with-hanzo.svg)](https://hanzo.app/dev/open?repo=github.com/hanzoai/brand&ref=main&action=edit) [![Deploy with Hanzo](https://hanzo.app/badges/deploy-with-hanzo.svg)](https://hanzo.app/dev/open?repo=github.com/hanzoai/brand&ref=main&action=deploy)
+
 The single source of truth for Hanzo brand identity — design tokens, logos,
 themes, docs theming, and a README/og:image **hero generator** — shared across
 every Hanzo, Lux, and Zoo repo so they all look and feel the same.
