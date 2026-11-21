@@ -87,6 +87,9 @@ jobs:
 
       - name: Publish
         if: steps.ahead.outputs.yes == 'true'
-        # npm, not pnpm: pnpm publish adds git checks a CI checkout fails.
+        # pnpm, because the manifest names its dependencies with the catalog protocol
+        # and only `pnpm publish` writes the versions in: 1.5.0 went out through
+        # `npm publish` with `"@hanzo/logo": "catalog:"`, which no consumer can
+        # install. --no-git-checks: a CI checkout fails pnpm's own.
         # publishConfig names the registry and the public access.
-        run: npm publish
+        run: pnpm publish --no-git-checks
